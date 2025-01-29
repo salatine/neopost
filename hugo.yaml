@@ -1,0 +1,15 @@
+title: "teste"
+baseURL: 'https://teste.neocities.org'
+languageCode: 'pt-br'
+
+params:
+  relatedtext: "Related"
+  favicon: "/favicon.ico"
+
+  datesinlist: true
+  authorsinlist: true
+
+  nextprev: true
+  taglist: true
+  showrss: true
+
