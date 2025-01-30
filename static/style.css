@@ -1,8 +1,8 @@
 /* these are the main colors and bg images
    replace them with anything you want! */
 :root {
-    --header-bg: url('images/header.png');
-    --site-bg: url("images/flowertile.png");
+    --header-bg: url('header.png');
+    --site-bg: url("flowertile.png");
     --accent-color: #f55cc0;
     --select-color: #ffc1e9;
     --link-color: #5083C1;
@@ -44,6 +44,9 @@ body {
 /* i think having better line spacing helps text to be more readable, but you can remove it if you want */
 p {line-height: 1.5em;}
 
+#read-more p {
+    display: none;
+}
 h1 {
     font-size: 1.5em;
     color: var(--post-header-color);
@@ -60,7 +63,7 @@ header {
     background-size: 100%;
     background-position: center;
 /* change the minimum height if you want it to take up more/less space */
-    min-height: 200px;
+    min-height: 120px;
 /* can also limit the size of the header if you don't want to fill up the top. i recommend at least 800px tho! */
     /*max-width: 980px;*/
 /*this centers it*/
@@ -95,7 +98,7 @@ li {
 /*you can change the normal dot to anything you want :)*/
     /*list-style-type: "💙 ";*/
 /*i used a flower since i already drew it for another page haha*/
-    list-style-image: url("images/flower.png");
+    list-style-image: url("flower.png");
 }
 
 nav {margin: 1em;}

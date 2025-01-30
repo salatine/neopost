@@ -1,3 +1,24 @@
-{{ define "title" -}}
-{{ .Title }}
-{{- end }}
+{{ define "post" }}
+<article>
+	<h2 style="margin: .3rem 0;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+	<div class="post-header">
+	@{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
+	</div>
+	<p>{{ .Summary }}</p>
+	{{ with .Params.title_images }}
+	<div>
+	{{ range first 2 . }}
+	<a href="{{ . }}" target="_blank"><img style="max-height: 12rem; margin-right: 1rem;" src="{{ . }}"></a>
+	{{ end }}
+	</div>
+	{{ end }}
+	<div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
+	{{ with .Params.ending_images }}
+	<div class="photosetx3">
+	{{ range first 3 . }}
+	<a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
+	{{ end }}
+	</div>
+	{{ end }}
+</article>
+{{ end }}

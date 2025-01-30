@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language }}">
 <head>
-	<title>{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}</title>
+	<title>{{ if not .IsHome }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
 	<link rel="canonical" href="{{ .Site.BaseURL }}">
 	<link rel='alternate' type='application/rss+xml' title="{{ .Site.Title }} RSS" href='/index.xml'>
 	<link rel='stylesheet' type='text/css' href='/style.css'>
@@ -15,21 +15,12 @@
 	<meta charset="utf-8">
 </head>
 <body>
-{{ if .Site.Menus.main }}{{ partial "nav.html" . }}{{ end -}}
+<header><h1 id="tag_{{ .Title }}">{{ .Title }}</h1></header>
 <main>
-<header><h1 id="tag_{{ .Title }}">{{ block "title" . }}{{ end }}</h1></header>
-<article>
-{{ block "tags" . }}
-{{ .Content }}
-{{ end }}
+{{ block "main" . }}{{ end }}
+{{ block "post" . }}{{ end }}
 {{ if .Param "nextprev" }}{{ partial "nextprev.html" . -}}{{ end -}}
 {{ if .Param "taglist" }}{{ partial "taglist.html" . }}{{ end -}}
-</article>
 </main>
-{{ block "footer" . }}
-<footer>
-	<a href="{{ .Site.BaseURL }}">{{ .Site.BaseURL }}</a>
-</footer>
-{{ end }}
 </body>
 </html>

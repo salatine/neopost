@@ -1,6 +1,10 @@
 title: "teste"
 baseURL: 'https://teste.neocities.org'
 languageCode: 'pt-br'
+titleCaseStyle: 'none' # comment this line for forcing capitalized titles on tags
+
+permalinks:
+  posts: "/posts/:filename/"
 
 params:
   relatedtext: "Related"
@@ -11,5 +15,4 @@ params:
 
   nextprev: true
   taglist: true
-  showrss: true
-
+  length_to_readmore: 150
