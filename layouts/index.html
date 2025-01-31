@@ -77,11 +77,11 @@
                 {{ end }}
             </div>
             {{ end }}
-            <div class="post-content">
+            <div class="post-content readmore">
                 <div id="text-content">{{ ( .ContentWithoutSummary | safeHTML ) | truncate $limit }}</div>
                 <div id="full-content" style="display: none;">{{ .ContentWithoutSummary | safeHTML }}</div>
                 {{ if gt (len (.ContentWithoutSummary | safeHTML)) $limit }}
-                <button id="read-more-btn" onclick="toggleReadMore()">Leia mais</button>
+                <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">leia mais</summary>
                 {{ end }}
             </div>
             {{ with .Params.ending_images }}
@@ -100,15 +100,13 @@
         var textContent = document.getElementById("text-content");
 
         if (fullContent.style.display === "none") {
-            // Exibe o conteúdo completo
             textContent.style.display = "none";
-            fullContent.style.display = "block";
-            btnText.innerHTML = "Leia menos"; // Troca o texto do botão
+            fullContent.style.display = "inline";
+            btnText.innerHTML = "leia menos";
         } else {
-            // Exibe o conteúdo truncado
-            textContent.style.display = "block";
+            textContent.style.display = "inline";
             fullContent.style.display = "none";
-            btnText.innerHTML = "Leia mais"; // Troca o texto do botão
+            btnText.innerHTML = "leia mais";
         }
     }
     </script>

@@ -1,20 +1,24 @@
+<style>
 /* these are the main colors and bg images
    replace them with anything you want! */
+{{ $themeName := .Site.Params.theme }}
+{{ $theme := index (where .Site.Data.themes "name" $themeName) 0 }}
+
 :root {
-    --header-bg: url('header.png');
-    --site-bg: url("flowertile.png");
-    --accent-color: #f55cc0;
-    --select-color: #ffc1e9;
-    --link-color: #5083C1;
-    --bg-color: #CEEAFF;
-    --bg-color2: white;
-    --text-color: #191919;
-    --border-color: #215697;
-    /*--gradient-bg: linear-gradient(0deg, #CADCFF00 0%, #fff 100%);*/
-    --post-header-color: white;
-    --post-shadow-color: #21569760;
-    --outline-color: #6EAAD6;
-    --outline-color2: #CEEAFF;
+    --header-bg: url("{{ $theme.header_bg }}");
+    --site-bg: url("{{ $theme.site_bg }}");
+    --accent-color: {{ $theme.accent_color }};
+    --select-color: {{ $theme.select_color }};
+    --link-color: {{ $theme.link_color }};
+    --bg-color: {{ $theme.bg_color }};
+    --text-color: {{ $theme.text_color }};
+    --bg-color2: {{ $theme.bg2_color }};
+    --border-color: {{ $theme.border_color }};
+    --special-text-color: {{ $theme.special_text_color }};
+    --post-header-color: {{ $theme.post_header_color }};
+    --post-shadow-color: {{ $theme.post_shadow_color }};
+    --outline-color: {{ $theme.post_outline_color }};
+    --outline-color2: {{ $theme.post_outline_color2 }};
 }
 /* you can get hex codes from sites like this:
    https://palettes.shecodes.io/
@@ -44,9 +48,6 @@ body {
 /* i think having better line spacing helps text to be more readable, but you can remove it if you want */
 p {line-height: 1.5em;}
 
-#read-more p {
-    display: none;
-}
 h1 {
     font-size: 1.5em;
     color: var(--post-header-color);
@@ -54,7 +55,7 @@ h1 {
 }
 h4,
 h5,
-h6 {color: var(--border-color);}
+h6 {color: var(--special-text-color);}
 
 header {
     background-color: var(--accent-color);
@@ -78,7 +79,7 @@ header {
 /* this is your site title displayed at the top of the page */
 header > h1 {
     background-color: var(--bg-color2);
-    color: var(--border-color);
+    color: var(--special-text-color);
     margin: 1em auto;
     font-size: 2em;
 /*uncomment this line if you want the header text to not take up the full length of the div*/
@@ -148,7 +149,7 @@ a:hover {
 
 #sidebar {
     background-color: var(--bg-color2);
-    color: var(--border-color);
+    color: var(--special-text-color);
     height: fit-content;
     min-width: 320px;
     margin-top: 1em;
@@ -226,14 +227,22 @@ article img {
     max-width: 100%;
 }
 
-/*you should always use this line if you have details/summary blocks cuz it makes it more obviously clickable*/
-details > summary {cursor:pointer;}
-
 .readmore summary {
     font-weight: bold;
-    color: var(--border-color);
+    color: var(--special-text-color);
     list-style: none;
+    cursor: pointer;
 }
+
+
+.readmore div {
+    display: inline;
+}
+
+.readmore div p {
+    display: inline;
+}
+
 .readmore summary::-webkit-details-marker {
   display: none;
 }
@@ -246,7 +255,7 @@ details > summary {cursor:pointer;}
 /*this is the top line for each post, with the name on the left and date/time on the right*/
 /*you can put a post title instead of a name/handle, i just set it up that way as an example haha*/
 .post-header {
-    color: var(--border-color);
+    color: var(--special-text-color);
     font-weight: bold;
     padding: .5rem 0;
     border-bottom: 4px double var(--outline-color);
@@ -342,3 +351,4 @@ footer {
         margin: .3em 1em;
     }
 }
+</style>

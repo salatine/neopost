@@ -2,4 +2,3 @@ content/
 public/
 .hugo_build.lock
 static/*
-!static/style.css

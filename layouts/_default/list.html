@@ -13,4 +13,5 @@
         {{ end }}
     </ul>
 </article>
+{{ if .Param "taglist" }}{{ partial "taglist.html" . }}{{ end -}}
 {{ end }}

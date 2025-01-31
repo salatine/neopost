@@ -7,12 +7,12 @@ permalinks:
   posts: "/posts/:filename/"
 
 params:
+  theme: "light-blue" # light-blue, dark-blue
   relatedtext: "Related"
   favicon: "/favicon.ico"
-
   datesinlist: true
   authorsinlist: true
 
   nextprev: true
   taglist: true
-  length_to_readmore: 150
+  length_to_readmore: 250
