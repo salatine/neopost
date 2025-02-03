@@ -138,11 +138,13 @@ a:hover {
 .flower {
     width: 300px; 
     aspect-ratio: 1;
-    {{ if .Site.Params.sidebar.icon.use_flower_shape }}
+    {{ with .Site.GetPage "section" "/sidebar/_index.md" }}
+    {{ if .Params.icon_use_flower_shape }}
         --g:/37.02% 37.02% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
         mask: 90.078% 79.895% var(--g),33.953% 97.355% var(--g),0.004% 49.372% var(--g),35.148% 2.257% var(--g),90.817% 21.121% var(--g),radial-gradient(100% 100%,#000 25.476%,#0000 calc(25.476% + 1px));
     {{ else }}
         border-radius: 50%;
+    {{ end }}
     {{ end }}
 }
 
@@ -176,7 +178,7 @@ main {
     border-radius: .5em;
     margin-bottom: 10px;
     padding: .5em 1em;
-    width: fit-content;
+    width: 100%;
 }
 
 article {
@@ -250,9 +252,10 @@ article img {
 .photosetx3 img {object-fit: cover;}
 
 .center { text-align: center; }
+
 .img-right {
-    max-width: 10.5em;
-    max-height: 10.5em;
+    max-width: 7.5em;
+    max-height: 7.5em;
     float: right;
 }
 

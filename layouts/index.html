@@ -2,53 +2,57 @@
     <div id="content">
     <aside id="sidebar">
         <div id="avatar">
-            <!--adding the flower class gives it a cute shape!-->
-            <img class="flower"
-                 src="{{ .Site.Params.sidebar.icon.path }}"
-                 alt="my icon!">
+            {{ with .Site.GetPage "section" "/sidebar/_index.md" }}
+            <img class="flower" src="{{ .Params.icon_path }}">
+            {{ end }}
         </div>
         
         <div id="bio">
-        {{ range .Site.Params.sidebar.bio }}
-            <p>{{ . }}</p>
+        {{ with .Site.GetPage "section" "/sidebar/bio.md" }}
+            {{ .Content | safeHTML }}
         {{ end }}
         </div>
         
         <div class="small-box">
-            <ul>
-            {{ range .Site.Params.sidebar.basic_info }}
-                <li>{{ . }}</li>
+            {{ with .Site.GetPage "section" "/sidebar/basic_info.md" }}
+                {{ .Content | safeHTML }}
             {{ end }}
             </ul>
         </div>
         
         <nav>
             <ul>
-            {{ range .Site.Params.sidebar.links }}
+            {{ with .Site.GetPage "section" "/sidebar/_index.md" }}
+            {{ range .Params.links }}
                 <li><a href="{{ .link }}">{{ .name }}</a></li>
+            {{ end }}
             {{ end }}
             </ul>
         </nav>
     </aside>
     <main>
         <article id="top" class="clearfix">
+            {{ with .Site.GetPage "section" "/welcome_header/_index.md" }}
             <section>
             <div class="img-right">
-                <img src="{{ .Site.Params.welcome_header.image }}">
+                <img src="{{ .Params.image }}">
             </div>
-            <h1>{{ .Site.Params.welcome_header.title }}</h1>
-            {{ range .Site.Params.welcome_header.intro }}
+            <div>
+            <h1>{{ .Params.title }}</h1>
+            {{ range .Params.intro }}
                 <p>{{ . }}</p>
             {{ end }}
+            </div>
             </section>
             <section>
-            <h4>{{ .Site.Params.welcome_header.list.name }}</h4>
+            <h4>{{ .Params.list.name }}</h4>
                 <ul>
-                {{ range .Site.Params.welcome_header.list.items }}
+                {{ range .Params.list.items }}
                     <li>{{ . }}</li>
                 {{ end }}
                 </ul>
             </section>
+            {{ end }}
         </article>
     {{ $limit := .Site.Params.read_more.length_limit }}
     {{ range first 5 .Site.RegularPages }}
