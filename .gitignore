@@ -1,4 +1,5 @@
 content/
 public/
 .hugo_build.lock
+hugo.yaml
 static/*

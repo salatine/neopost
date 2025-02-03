@@ -1,11 +1,8 @@
 <style>
-/* these are the main colors and bg images
-   replace them with anything you want! */
 {{ $themeName := .Site.Params.theme }}
 {{ $theme := index (where .Site.Data.themes "name" $themeName) 0 }}
 
 :root {
-    --header-bg: url("{{ $theme.header_bg }}");
     --site-bg: url("{{ $theme.site_bg }}");
     --accent-color: {{ $theme.accent_color }};
     --select-color: {{ $theme.select_color }};
@@ -20,17 +17,10 @@
     --outline-color: {{ $theme.post_outline_color }};
     --outline-color2: {{ $theme.post_outline_color2 }};
 }
-/* you can get hex codes from sites like this:
-   https://palettes.shecodes.io/
-   i just looked up "css color templates" to find that link! */
-
-/* this applies to all the content */
 * {
     box-sizing: border-box;
-/* change the font here, it's set up to all use the same one */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-/* this is for when you select text on the page */
 ::selection {
     background: var(--select-color);
     color: var(--border-color);
@@ -40,12 +30,9 @@ body {
     background-color: var(--bg-color);
     background-image: var(--site-bg);
     margin: 0;
-/*this is the default font size! headings and stuff are adjusted based on this number.*/
     font-size: 14px;
-/*and the default text color! it's dark grey here.*/
     color: var(--text-color);
 }
-/* i think having better line spacing helps text to be more readable, but you can remove it if you want */
 p {line-height: 1.5em;}
 
 h1 {
@@ -58,29 +45,17 @@ h5,
 h6 {color: var(--special-text-color);}
 
 header {
-    background-color: var(--accent-color);
-/* you can add the image url in :root (at the top) if you want */
-    background: var(--header-bg);
     background-size: 100%;
     background-position: center;
-/* change the minimum height if you want it to take up more/less space */
-    min-height: 120px;
-/* can also limit the size of the header if you don't want to fill up the top. i recommend at least 800px tho! */
-    /*max-width: 980px;*/
-/*this centers it*/
-    margin: 0 auto;
-/*i gave it some borders, you can change the colors or remove them, but having the borders there keeps it glued to the top of the page all nice, so i recommend keeping them!*/
-    border-top: 12px solid var(--bg-color2);
-    border-bottom: 12px solid var(--bg-color2);
-/*to align the header block to the bottom, uncomment the line below*/
-    /*align-content: flex-end;*/
+    min-height: 80px;
+    margin: 0 0;
+    align-content: center;
 }
 
-/* this is your site title displayed at the top of the page */
 header > h1 {
     background-color: var(--bg-color2);
     color: var(--special-text-color);
-    margin: 1em auto;
+    margin: 0 auto;
     font-size: 2em;
 /*uncomment this line if you want the header text to not take up the full length of the div*/
     /*width: fit-content;*/
@@ -88,17 +63,12 @@ header > h1 {
     padding: 6px 12px;
     border-radius: 1em;
     border: 4px double var(--outline-color);
-/*normal headers have a filter, so we gotta turn it off for this special heading*/
     filter: none;
-/* you can change the text-align to center or right if you want it placed differently */
     text-align: center;
 }
 
-/*this is for lists*/
 li {
-/*you can change the normal dot to anything you want :)*/
     /*list-style-type: "💙 ";*/
-/*i used a flower since i already drew it for another page haha*/
     list-style-image: url("flower.png");
 }
 
@@ -108,11 +78,8 @@ nav > ul {
     max-width: 960px;
     margin: auto;
     line-height: 3rem;
-/* this line takes away the dot in front of the list items */
     list-style-type: none;
-/* list items have default padding but we don't need it for these */
     padding-left: 0;
-/* and this spaces out the buttons so they're not touching */
     justify-content: space-evenly;
 }
 nav li {
@@ -124,7 +91,6 @@ nav li > a {
     background-color: var(--bg-color);
     border: 4px double var(--outline-color);
     padding: .5em 3em;
-/* this takes away the link underline */
     text-decoration: none;
 }
 nav li > a:visited {color: var(--link-color);}
@@ -160,23 +126,24 @@ a:hover {
     max-width: 240px;
     margin: auto;
     border: 2px solid var(--bg-color);
-/*i gave this one small text cuz i think it looks cute, but you can remove this line to make it normal*/
     font-size: 11px;
-/*making sure the list items are spaced correctly cuz it's hard to read when they're squished together*/
     line-height: 1.5rem;
 }
 
 #avatar {
     margin: .5em;
-/*this line will limit the image size if you decide not to use the flower shape below*/
     max-width: 320px;
 }
 /*flower shape generated from here: https://css-generators.com/flower-shapes/ */
 .flower {
-    width: 320px; /* adjust to control the size */
+    width: 300px; 
     aspect-ratio: 1;
-    --g:/37.02% 37.02% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
-    mask: 90.078% 79.895% var(--g),33.953% 97.355% var(--g),0.004% 49.372% var(--g),35.148% 2.257% var(--g),90.817% 21.121% var(--g),radial-gradient(100% 100%,#000 25.476%,#0000 calc(25.476% + 1px));
+    {{ if .Site.Params.sidebar.icon.use_flower_shape }}
+        --g:/37.02% 37.02% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
+        mask: 90.078% 79.895% var(--g),33.953% 97.355% var(--g),0.004% 49.372% var(--g),35.148% 2.257% var(--g),90.817% 21.121% var(--g),radial-gradient(100% 100%,#000 25.476%,#0000 calc(25.476% + 1px));
+    {{ else }}
+        border-radius: 50%;
+    {{ end }}
 }
 
 #bio {
@@ -185,7 +152,6 @@ a:hover {
     background: var(--bg-color);
     border: 4px double var(--bg-color2);
     border-radius: 2em;
-/*made the text slightly smaller again here since periwinkle's bio was a little lengthy*/
     font-size: small;
 }
 #bio p { margin: 1em; }
@@ -198,22 +164,21 @@ a:hover {
 
 main {
     padding: 1em;
+    padding-top: 0;
 }
 
-/*this is the top post on the blog. you can treat it like a pinned post if you want!*/
 #top {
     background-color: var(--bg-color);
 }
-/*this bit gives it a white background*/
+
 #top section {
     background-color: var(--bg-color2);
     border-radius: .5em;
     margin-bottom: 10px;
-    padding: .2em 1em;
+    padding: .5em 1em;
     width: fit-content;
 }
 
-/*these are the regular blog post styles!*/
 article {
     background-color: var(--bg-color2);
     padding: 1em;
@@ -223,7 +188,6 @@ article {
     box-shadow: var(--post-shadow-color) 5px 5px;
 }
 article img {
-/*make sure large images get resized to fit in the post*/
     max-width: 100%;
 }
 
@@ -252,65 +216,55 @@ article img {
     margin-bottom: .6em;
 }
 
-/*this is the top line for each post, with the name on the left and date/time on the right*/
-/*you can put a post title instead of a name/handle, i just set it up that way as an example haha*/
 .post-header {
     color: var(--special-text-color);
     font-weight: bold;
     padding: .5rem 0;
     border-bottom: 4px double var(--outline-color);
 }
+
 .timestamp {
     font-weight: normal;
     font-size: smaller;
     margin: .2em;
-/*this keeps it to the right edge*/
     float: right;
 }
 
-/*these set up tumblr-style photoset grids*/
 .photosetx2,
 .photosetx3 {
     display: grid;
     gap: 4px;
     align-items: center;
 }
+
 .photosetx2 {grid-template-columns: 1fr 1fr;}
 .photosetx3 {grid-template-columns: 1fr 1fr 1fr;}
-/*adjust this to your liking! it crops images that are too tall*/
+
 .cropped {
     width: 156px;
     height: 156px;
     overflow: hidden;
     object-position: 25% 25%;
 }
-/*this makes sure the image doesn't get distorted when cropped*/
 .photosetx2 img,
 .photosetx3 img {object-fit: cover;}
 
-/* a class for centering text and images */
 .center { text-align: center; }
-.img-right { float: right; }
+.img-right {
+    max-width: 10.5em;
+    max-height: 10.5em;
+    float: right;
+}
 
-/*this stops the float image from overflowing out of its container*/
 .clearfix::after {
   content: "";
   clear: both;
   display: table;
 }
-/*you can use the <small> tag in html, or make a class like this. up to you!*/
+
 .small-text {
     font-size: 11px;
-/*i gave it a shadow cuz i think it looks nice... yayyy*/
     text-shadow: var(--bg-color) 1px 1px;
-}
-
-footer {
-    text-align: center;
-    font-size: small;
-    margin: auto;
-    padding: .5em;
-    background: var(--bg-color2);
 }
 
 /* these are the mobile styles! */
@@ -328,7 +282,7 @@ footer {
         border: none;
         border-radius: 0;
     }
-    header {min-height: 160px;}
+    header {min-height: 110px;}
     header > h1 { 
         width: fit-content;
         padding: .3em 1em;

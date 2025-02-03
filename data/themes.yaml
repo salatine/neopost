@@ -1,5 +1,4 @@
 - name: "light-blue"
-  header_bg: "header.png"
   site_bg: "flowertile.png"
   accent_color: "#f55cc0"
   select_color: "#ffc1e9"
@@ -15,7 +14,6 @@
   post_outline_color2: "#CEEAFF"
 
 - name: "dark-blue"
-  header_bg: "header.png"
   site_bg: "black-flowertile.png"
   accent_color: "#2c3e50"
   select_color: "#34495e"

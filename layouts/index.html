@@ -4,61 +4,54 @@
         <div id="avatar">
             <!--adding the flower class gives it a cute shape!-->
             <img class="flower"
-                 src="icon.png"
+                 src="{{ .Site.Params.sidebar.icon.path }}"
                  alt="my icon!">
         </div>
         
         <div id="bio">
-            <p>Periwinkle speaking~! Your favorite aromagician, I'm sure &lt;3</p>
-            <p>This blog is completely SFW... oh, don't look so disappointed! Perhaps I'll make an "after dark" page one of these days ;)</p>
+        {{ range .Site.Params.sidebar.bio }}
+            <p>{{ . }}</p>
+        {{ end }}
         </div>
         
         <div class="small-box">
             <ul>
-                <li>age: 26</li>
-                <li>pronouns: he/him </li>
-                <li>relationship status: taken 💙</li>
+            {{ range .Site.Params.sidebar.basic_info }}
+                <li>{{ . }}</li>
+            {{ end }}
             </ul>
         </div>
         
         <nav>
             <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#link1">Link 1</a></li>
-            <li><a href="#link2">Link 2</a></li>
-            <li><a href="#link3">Link 3</a></li>
-            <li><a href="#link4">Link 4</a></li>
-            <li><a href="#link5">Link 5</a></li>
+            {{ range .Site.Params.sidebar.links }}
+                <li><a href="{{ .link }}">{{ .name }}</a></li>
+            {{ end }}
             </ul>
         </nav>
-        <div class="center small-text">
-            <p>template by <a href="https://nomnomnami.com">NomnomNami</a>!</p>
-            <p>posted: 10/17/2024</p>
-        </div>
     </aside>
     <main>
         <article id="top" class="clearfix">
-            <div class="img-right">
-                <img src="periwinkle.png" alt="yours truly">
-            </div>
             <section>
-                <h1>Welcome to my Blog~!</h1>
-                <p>this template is special compared to my others... it's set up to look like a blog! here's an <a href="https://nomnomnami.itch.io/starry-flowers" target="_blank">example link</a>. (it goes to the game Periwinkle is from!)</p>
-                <p>remember to replace the navigation links with pages you want to show people! happy posting!!!</p>
+            <div class="img-right">
+                <img src="{{ .Site.Params.welcome_header.image }}">
+            </div>
+            <h1>{{ .Site.Params.welcome_header.title }}</h1>
+            {{ range .Site.Params.welcome_header.intro }}
+                <p>{{ . }}</p>
+            {{ end }}
             </section>
             <section>
-                <h4>things to blog about:</h4>
+            <h4>{{ .Site.Params.welcome_header.list.name }}</h4>
                 <ul>
-                    <li>fandom stuff</li>
-                    <li>hobbies</li>
-                    <li>art! post your art!!!!</li>
-                    <li>interesting sites you find</li>
+                {{ range .Site.Params.welcome_header.list.items }}
+                    <li>{{ . }}</li>
+                {{ end }}
                 </ul>
             </section>
         </article>
-    {{ $limit := .Site.Params.length_to_readmore }}
+    {{ $limit := .Site.Params.read_more.length_limit }}
     {{ range first 5 .Site.RegularPages }}
-    <!--this is the block you can copypaste to create a new "post"-->
         <article>
             <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
             {{ $tags := .Params.tags }}
@@ -81,7 +74,7 @@
                 <div id="text-content">{{ ( .ContentWithoutSummary | safeHTML ) | truncate $limit }}</div>
                 <div id="full-content" style="display: none;">{{ .ContentWithoutSummary | safeHTML }}</div>
                 {{ if gt (len (.ContentWithoutSummary | safeHTML)) $limit }}
-                <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">leia mais</summary>
+        <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">{{ .Site.Params.read_more.text.more }}</summary>
                 {{ end }}
             </div>
             {{ with .Params.ending_images }}
@@ -102,11 +95,11 @@
         if (fullContent.style.display === "none") {
             textContent.style.display = "none";
             fullContent.style.display = "inline";
-            btnText.innerHTML = "leia menos";
+            btnText.innerHTML = {{ .Site.Params.read_more.text.less }};
         } else {
             textContent.style.display = "inline";
             fullContent.style.display = "none";
-            btnText.innerHTML = "leia mais";
+            btnText.innerHTML = {{ .Site.Params.read_more.text.more }};
         }
     }
     </script>
