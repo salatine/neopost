@@ -1,6 +1,6 @@
-content/
-public/
+/content/
+/public/
 .hugo_build.lock
-hugo.yaml
-static/*
-example/public
+/hugo.yaml
+/static/*
+/example/public
