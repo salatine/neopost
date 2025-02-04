@@ -1,0 +1,28 @@
+name: deploy to neocities
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4a
+
+      - name: setup hugo
+        uses: peaceiris/actions-hugo@v3
+
+      - name: build
+        run: cd example && hugo --gc --minify --buildFuture --themesDir ../../
+
+      - name: deploy to neocities
+        uses: bcomnes/deploy-to-neocities@v3
+        with:
+          api_key: ${{ secrets.NEOCITIES_API_KEY }}
+          cleanup: false
+          neocities_supporter: false
+          dist_dir: example/public
