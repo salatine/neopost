@@ -11,7 +11,7 @@ permalinks:
   posts: "/posts/:filename/"
 
 params:
-  theme: "light-purple" # light-blue, dark-blue, light-green, light-yellow, light-pink, light-purple
+  theme: "light-blue" # light-blue, dark-blue, light-green, light-yellow, light-pink, light-purple
   favicon: "/favicon.ico"
 
   read_more:
