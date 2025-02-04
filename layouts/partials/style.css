@@ -16,11 +16,15 @@
     --post-shadow-color: {{ $theme.post_shadow_color }};
     --outline-color: {{ $theme.post_outline_color }};
     --outline-color2: {{ $theme.post_outline_color2 }};
+    --list-style-type: "{{ $theme.list_style.type}}";
+    --list-style-image: url("{{ $theme.list_style.image}}");
 }
+
 * {
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 ::selection {
     background: var(--select-color);
     color: var(--border-color);
@@ -33,6 +37,7 @@ body {
     font-size: 14px;
     color: var(--text-color);
 }
+
 p {line-height: 1.5em;}
 
 h1 {
@@ -40,6 +45,7 @@ h1 {
     color: var(--post-header-color);
     filter: drop-shadow(2px 0 0 var(--outline-color)) drop-shadow(0 2px 0 var(--outline-color)) drop-shadow(-2px 0 0 var(--outline-color)) drop-shadow(0 -2px 0 var(--outline-color))drop-shadow(0 1px 1px var(--outline-color2)) drop-shadow(1px 0 1px var(--outline-color2));
 }
+
 h4,
 h5,
 h6 {color: var(--special-text-color);}
@@ -68,8 +74,11 @@ header > h1 {
 }
 
 li {
-    /*list-style-type: "💙 ";*/
-    list-style-image: url("flower.png");
+    {{ if $theme.list_style.image }}
+        list-style-image: var(--list-style-image);
+    {{ else }}
+        list-style-type: var(--list-style-type);
+    {{ end }}
 }
 
 nav {margin: 1em;}
@@ -82,10 +91,13 @@ nav > ul {
     padding-left: 0;
     justify-content: space-evenly;
 }
+
 nav li {
     text-align: center;
     list-style-image: none;
+    list-style-type: none;
 }
+
 nav li > a {
     font-weight: bold;
     background-color: var(--bg-color);
@@ -93,20 +105,23 @@ nav li > a {
     padding: .5em 3em;
     text-decoration: none;
 }
+
 nav li > a:visited {color: var(--link-color);}
 nav li > a:hover {
     color: var(--accent-color);
     background-color: var(--select-color);
 }
-    
+
 a {
     color: var(--link-color);
     border-radius: .3em;
     transition: .2s ease-out;
 }
+
 a:visited {
     color: var(--text-color);
 }
+
 a:hover {
     color: var(--accent-color);
     border-color: var(--accent-color);
@@ -122,6 +137,7 @@ a:hover {
     margin-right: 2em;
     border-radius: .5em;
 }
+
 .small-box {
     max-width: 240px;
     margin: auto;
@@ -134,6 +150,7 @@ a:hover {
     margin: .5em;
     max-width: 320px;
 }
+
 /*flower shape generated from here: https://css-generators.com/flower-shapes/ */
 .flower {
     width: 300px; 
@@ -156,6 +173,7 @@ a:hover {
     border-radius: 2em;
     font-size: small;
 }
+
 #bio p { margin: 1em; }
 
 #content {
@@ -200,6 +218,19 @@ article img {
     cursor: pointer;
 }
 
+header h1 a {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--special-text-color);
+}
+
+header h1 a:visited {
+    color: inherit;
+}
+
+header h1 a:hover {
+    color: inherit;
+}
 
 .readmore div {
     display: inline;
@@ -212,6 +243,7 @@ article img {
 .readmore summary::-webkit-details-marker {
   display: none;
 }
+
 .readmore[open] > summary {
     border-bottom: 2px dashed var(--bg-color);
     padding-bottom: .6em;
@@ -230,6 +262,10 @@ article img {
     font-size: smaller;
     margin: .2em;
     float: right;
+}
+
+.tag-item p {
+    font-size: smaller;
 }
 
 .photosetx2,

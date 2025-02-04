@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article style="padding-left: 2rem;">
+    <h2>{{ .Title }}</h2>
+    <ul>
+        {{ range .Pages }}
+        <li class="tag-item">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <p> > {{ .Plain | safeHTML | truncate 250 }}</p>
+        </li>
+        {{ end }}
+    </ul>
+    <p style="margin-top: 2.5rem;"><a href="/tags">all tags</a></p>
+</article>
+{{ end }}

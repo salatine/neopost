@@ -1,6 +1,11 @@
 {{ define "main" }}
 <article>
-	<h2 style="margin: .3rem 0;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+	<h2>{{ .Title }}</h2>
+	{{ $tags := .Params.tags }}
+	tags:
+	{{ range $index, $tag := .Params.tags }}
+	<a href="/tags/{{ $tag }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
+	{{ end }}
 	<div class="post-header">
 	@{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
 	</div>
@@ -8,15 +13,15 @@
 	{{ with .Params.title_images }}
 	<div>
 	{{ range first 2 . }}
-	<a href="{{ . }}" target="_blank"><img style="max-height: 12rem; margin-right: 1rem;" src="{{ . }}"></a>
+	<a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
 	{{ end }}
 	</div>
 	{{ end }}
 	<div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
 	{{ with .Params.ending_images }}
-	<div class="photosetx3">
+	<div>
 	{{ range first 3 . }}
-	<a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
+	<a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
 	{{ end }}
 	</div>
 	{{ end }}

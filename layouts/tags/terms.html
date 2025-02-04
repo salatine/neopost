@@ -1,0 +1,12 @@
+{{ define "main" }}
+<article style="padding-left: 2rem;">
+    <h2>tags</h2>
+    <ul>
+    {{ range .Site.Taxonomies.tags }}
+    <li style="margin-bottom: .5rem;">
+            <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+    </li>
+    {{ end }}
+    </ul>
+</article>
+{{ end }}

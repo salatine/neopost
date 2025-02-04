@@ -1,17 +1,2 @@
 {{ define "main" }}
-<article>
-    <ul>
-        {{ range .Site.Taxonomies.tags }}
-        <li style="list-style: none; margin-bottom: 1.5rem;">
-            <h2>{{ .Page.Title }}</h2>
-            <ul>
-                {{ range .Pages }}
-                <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-                {{ end }}
-            </ul>
-        </li>
-        {{ end }}
-    </ul>
-</article>
-{{ if .Param "taglist" }}{{ partial "taglist.html" . }}{{ end -}}
 {{ end }}

@@ -1,5 +1,5 @@
 - name: "light-blue"
-  site_bg: "flowertile.png"
+  site_bg: "/flowertile.png"
   accent_color: "#f55cc0"
   select_color: "#ffc1e9"
   link_color: "#5083C1"
@@ -12,9 +12,12 @@
   post_header_color: "white"
   post_outline_color: "#6EAAD6"
   post_outline_color2: "#CEEAFF"
+  list_style:
+    image: "/flower.png"
+    # type: "+ "
 
 - name: "dark-blue"
-  site_bg: "black-flowertile.png"
+  site_bg: "/black-flowertile.png"
   accent_color: "#2c3e50"
   select_color: "#34495e"
   link_color: "#ecf0f1"
@@ -27,3 +30,6 @@
   post_header_color: "white"
   post_outline_color: "#0a1c30"
   post_outline_color2: "#4e5f85"
+  list_style:
+    image: "/flower.png"
+    # type: "+ "
