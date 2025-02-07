@@ -57,4 +57,4 @@ you can edit it at `content/welcome_header/_index.md`.
 
 
 ### license
-*neopost* is licensed under the [gpl-3.0 license](./LICENSE).
+*neopost* is licensed under the [gpl-3.0 license](https://raw.githubusercontent.com/salatine/neopost/main/LICENSE).
