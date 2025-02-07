@@ -55,7 +55,8 @@
             {{ end }}
         </article>
     {{ $limit := .Site.Params.read_more.length_limit }}
-    {{ range first 5 .Site.RegularPages }}
+    {{ $pages := where .Site.RegularPages "Section" "posts" }}
+    {{ range (.Paginate $pages (or .Site.Params.posts_per_page 5)).Pages }}
         <article>
             <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
             {{ $tags := .Params.tags }}
@@ -90,6 +91,7 @@
             {{ end }}
         </article>
     {{ end }}
+    {{ template "_internal/pagination.html" . }}
     <script>
     function toggleReadMore() {
         var fullContent = document.getElementById("full-content");

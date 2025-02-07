@@ -73,6 +73,18 @@ header > h1 {
     text-align: center;
 }
 
+ul.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+li.page-item {
+    display: inline-flex;
+    font-size: 1rem;
+    margin: .2rem;
+}
+
 li {
     {{ if $theme.list_style.image }}
         list-style-image: var(--list-style-image);
