@@ -1,8 +1,0 @@
-name: 'neopost'
-license: 'GPL-3.0'
-licenselink: 'https://github.com/salatine/neopost/LICENSE'
-description: 'a Hugo theme to easily create your neocities personal blog!'
-homepage: 'https://github.com/salatine/neopost'
-
-author:
-  name: 'salatine'

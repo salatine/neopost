@@ -1,0 +1,13 @@
+name = 'neopost'
+license = 'GPL-3.0'
+licenselink = 'https://github.com/salatine/neopost/LICENSE'
+description = 'neopost is a minimalist, customizable theme for personal blogs, inspired by the aesthetics of neocities! it allows for flexible content management and easy customization of styles through simple configuration.'
+
+homepage = 'https://github.com/salatine/neopost'
+
+demosite = 'https://neopost.netlify.app'
+
+tags = ["blog", "personal", "responsive", "light", "dark"]
+
+[author]
+  name = 'salatine'
