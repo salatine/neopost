@@ -1,7 +1,7 @@
 # neopost
 *neopost* is a minimalist, customizable theme for personal blogs, inspired by the aesthetics of neocities. it allows for flexible content management and easy customization of styles through simple configuration.
 ![neopost example site, with the "light-blue" variant theme.](https://raw.githubusercontent.com/salatine/neopost/main/images/screenshot.png)
-this example site is available at [neopost.neocities.org](https://neopost.neocities.org).
+this example site is available at ![neopost.neocities.org](https://neopost.neocities.org).
 
 ## installation
 ```bash
