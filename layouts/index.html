@@ -76,10 +76,13 @@
             </div>
             {{ end }}
             <div class="post-content readmore">
-                <div id="text-content">{{ ( .ContentWithoutSummary | safeHTML ) | truncate $limit }}</div>
+                <!-- subtracting one because of how truncate works -->
+                {{ if gt (sub (len ((.ContentWithoutSummary | safeHTML) | plainify)) 1) $limit }}
+                <div id="text-content">{{ ( .ContentWithoutSummary | safeHTML) | truncate $limit }}</div>
                 <div id="full-content" style="display: none;">{{ .ContentWithoutSummary | safeHTML }}</div>
-                {{ if gt (len (.ContentWithoutSummary | safeHTML)) $limit }}
-        <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">{{ .Site.Params.read_more.text.more }}</summary>
+                <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">{{ .Site.Params.read_more.text.more }}</summary>
+                {{ else }} 
+                <div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
                 {{ end }}
             </div>
             {{ with .Params.ending_images }}
