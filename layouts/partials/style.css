@@ -347,6 +347,35 @@ header h1 a:hover {
     text-shadow: var(--bg-color) 1px 1px;
 }
 
+.dropbox-btn {
+    color: var(--link-color);
+    font-weight: bold;
+    background-color: var(--bg-color);
+    /* border: 4px double var(--outline-color); */
+    border: 1px solid var(--outline-color);
+    /* padding: .5em 3em; */
+    text-decoration: none;
+}
+
+.dropbox-content[visible] {
+    display: block;
+}
+
+.dropbox-content {
+    display: none;
+    position: absolute;
+    z-index: 1
+}
+
+.table-of-contents {
+    background-color: var(--bg-color2);
+    padding: 1em;
+    border: 2px solid var(--border-color);
+    border-radius: .3em;
+    margin-bottom: 1em;
+    box-shadow: var(--post-shadow-color) 5px 5px;
+}
+
 /* these are the mobile styles! */
 @media only screen and (max-width: 800px) {
     #content {

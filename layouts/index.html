@@ -56,19 +56,25 @@
         </article>
     {{ $limit := .Site.Params.read_more.length_limit }}
     {{ $pages := where .Site.RegularPages "Section" "posts" }}
-    {{ range (.Paginate $pages (or .Site.Params.posts_per_page 5)).Pages }}
+    {{ range $index, $page := (.Paginate $pages (or .Site.Params.posts_per_page 5)).Pages }}
         <article>
+            {{- if (index .Params "table-of-contents") }}
+            <button class="dropbox-btn" onclick="toggleDropbox('post-toc-{{ $index }}')" >☰</button>
+            <div id="post-toc-{{ $index }}" class="dropbox-content table-of-contents">
+                {{ partial "toc.html" $page }}
+            </div>
+            {{ end }}
             <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-            {{ $tags := .Params.tags }}
+            {{ $tags := $page.Params.tags }}
             tags:
-            {{ range $index, $tag := .Params.tags }}
+            {{ range $index, $tag := $page.Params.tags }}
             <a href="/tags/{{ $tag }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
             {{ end }}
             <div class="post-header">
-                @{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
+                @{{ $page.Params.author }} <span class="timestamp">{{ $page.Date.Format "02/01/2006" }}</span>
             </div>
             <p>{{ .Summary }}</p>
-            {{ with .Params.title_images }}
+            {{ with $page.Params.title_images }}
             <div class="photosetx2">
                 {{ range first 2 . }}
                 <a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
@@ -77,15 +83,15 @@
             {{ end }}
             <div class="post-content readmore">
                 <!-- subtracting one because of how truncate works -->
-                {{ if gt (sub (len ((.ContentWithoutSummary | safeHTML) | plainify)) 1) $limit }}
+                {{ if gt (sub (len (( $page.ContentWithoutSummary | safeHTML) | plainify)) 1) $limit }}
                 <div id="text-content">{{ ( .ContentWithoutSummary | safeHTML) | truncate $limit }}</div>
-                <div id="full-content" style="display: none;">{{ .ContentWithoutSummary | safeHTML }}</div>
+                <div id="full-content" style="display: none;">{{ $page.ContentWithoutSummary | safeHTML }}</div>
                 <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">{{ .Site.Params.read_more.text.more }}</summary>
                 {{ else }} 
-                <div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
+                <div id="full-content">{{ $page.ContentWithoutSummary | safeHTML }}</div>
                 {{ end }}
             </div>
-            {{ with .Params.ending_images }}
+            {{ with $page.Params.ending_images }}
             <div class="photosetx3">
                 {{ range first 3 . }}
                 <a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
@@ -96,6 +102,16 @@
     {{ end }}
     {{ template "_internal/pagination.html" . }}
     <script>
+    window.addEventListener('click', e => {
+        let dropboxs = document.getElementsByClassName("dropbox-content");
+        console.log(dropboxs.length);
+        if(dropboxs.namedItem(e.target.id) == null) {
+            for (let i = 0; i < dropboxs.length; i++) {
+                dropboxs[i].removeAttribute("visible");
+            }
+        }
+    }, true)
+
     function toggleReadMore() {
         var fullContent = document.getElementById("full-content");
         var btnText = document.getElementById("read-more-btn");
@@ -110,6 +126,12 @@
             fullContent.style.display = "none";
             btnText.innerHTML = {{ .Site.Params.read_more.text.more }};
         }
+    }
+
+    function toggleDropbox(id) {
+        let dropbox = document.getElementById(id);
+
+        dropbox.toggleAttribute("visible");
     }
     </script>
     </main>
