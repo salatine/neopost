@@ -376,6 +376,17 @@ header h1 a:hover {
     box-shadow: var(--post-shadow-color) 5px 5px;
 }
 
+.table-of-contents.sidebar {
+}
+
+.table-of-contents.float {
+}
+
+#single-post {
+    display: flex;
+    gap: 1rem;
+}
+
 /* these are the mobile styles! */
 @media only screen and (max-width: 800px) {
     #content {

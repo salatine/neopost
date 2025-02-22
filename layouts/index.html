@@ -60,7 +60,7 @@
         <article>
             {{- if (index .Params "table-of-contents") }}
             <button class="dropbox-btn" onclick="toggleDropbox('post-toc-{{ $index }}')" >☰</button>
-            <div id="post-toc-{{ $index }}" class="dropbox-content table-of-contents">
+            <div id="post-toc-{{ $index }}" class="dropbox-content table-of-contents float">
                 {{ partial "toc.html" $page }}
             </div>
             {{ end }}

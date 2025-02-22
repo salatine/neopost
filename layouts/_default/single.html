@@ -1,29 +1,37 @@
 {{ define "main" }}
-<article>
-	<h2>{{ .Title }}</h2>
-	{{ $tags := .Params.tags }}
-	tags:
-	{{ range $index, $tag := .Params.tags }}
-	<a href="/tags/{{ $tag }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
-	{{ end }}
-	<div class="post-header">
-	@{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
-	</div>
-	<p>{{ .Summary }}</p>
-	{{ with .Params.title_images }}
-	<div>
-	{{ range first 2 . }}
-	<a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
-	{{ end }}
-	</div>
-	{{ end }}
-	<div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
-	{{ with .Params.ending_images }}
-	<div>
-	{{ range first 3 . }}
-	<a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
-	{{ end }}
-	</div>
-	{{ end }}
-</article>
+<div id="single-post">
+    {{- if (index .Params "table-of-contents") }}
+    <aside class="table-of-contents sidebar">
+            {{ partial "toc.html" . }}
+    </aside>
+    {{ end }}
+
+    <article>
+        <h2>{{ .Title }}</h2>
+        {{ $tags := .Params.tags }}
+        tags:
+        {{ range $index, $tag := .Params.tags }}
+        <a href="/tags/{{ $tag }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
+        {{ end }}
+        <div class="post-header">
+        @{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
+        </div>
+        <p>{{ .Summary }}</p>
+        {{ with .Params.title_images }}
+        <div>
+        {{ range first 2 . }}
+        <a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
+        {{ end }}
+        </div>
+        {{ end }}
+        <div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
+        {{ with .Params.ending_images }}
+        <div>
+        {{ range first 3 . }}
+        <a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
+        {{ end }}
+        </div>
+        {{ end }}
+    </article>
+</div>
 {{ end }}
