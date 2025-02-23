@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div id="single-post">
+<div {{ if (index .Params "table-of-contents") }} id="single-grid" {{ end }}>
     {{- if (index .Params "table-of-contents") }}
     <aside class="table-of-contents sidebar">
             {{ partial "toc.html" . }}

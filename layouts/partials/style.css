@@ -382,8 +382,9 @@ header h1 a:hover {
 .table-of-contents.float {
 }
 
-#single-post {
-    display: flex;
+#single-grid {
+    display: grid;
+    grid-template-columns: 1fr 9fr;
     gap: 1rem;
 }
 
