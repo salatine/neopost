@@ -17,15 +17,15 @@
         @{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
         </div>
         <p>{{ .Summary }}</p>
-        {{ with .Params.title_images }}
+        {{ with index .Params "title-images" }}
         <div>
         {{ range first 2 . }}
         <a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
         {{ end }}
         </div>
         {{ end }}
-        <div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
-        {{ with .Params.ending_images }}
+        <div class="auto-numbering" id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
+        {{ with index .Params "ending-images" }}
         <div>
         {{ range first 3 . }}
         <a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>

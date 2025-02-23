@@ -96,9 +96,9 @@ Start with these basic CSS rules to style the table of contents:
 {{- end }}
 
 {{- /* Get configuration. */}}
-{{- $startLevel := or ($.Param "toc.startLevel" | int) 2 }}
-{{- $endLevel := or ($.Param "toc.endLevel" | int) 3 }}
-{{- $minNumHeadings := or ($.Param "toc.minNumHeadings" | int) 2 }}
+{{- $minNumHeadings := 1 }}
+{{- $startLevel := 2 }}
+{{- $endLevel := or ($.Param "toc.endLevel" | int) 6 }}
 
 {{- /* Get headings. */}}
 {{- $headings := slice }}
@@ -140,22 +140,32 @@ Start with these basic CSS rules to style the table of contents:
 {{- if (index .Params "table-of-contents") }}
   {{- with $headings }}
     {{- if ge (len .) $minNumHeadings }}
-      <nav class="toc">
-        <div class="toc-title">
-          {{ or (T "toc_title") "Table of contents" | safeHTML }}
-        </div>
-        {{- range . }}
-          {{- $attrs := dict "class" (printf "toc-item toc-level-%d" (add 1 (sub .level $startLevel))) }}
-          {{- with .id }}
-            {{- $attrs = merge $attrs (dict "href" (printf "%s#%s" $.RelPermalink .)) }}
-          {{- end }}
-          <a
-          {{- range $k, $v := $attrs }}
-            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-          {{- end -}}
-          >{{ .text }}</a>
+  <nav class="toc">
+  <ul>
+    {{- $counter := dict "h2" 0 "h3" 0 "h4" 0 "h5" 0 "h6" 0 }}
+    {{- range . }}
+      {{- $level := .level }}
+      {{- range $i, $l := (seq (add $level 1) 6) }}
+        {{- $counter = merge $counter (dict (printf "h%d" $l) 0) }}
+      {{- end }}
+      {{- $counter = merge $counter (dict (printf "h%d" $level) (add (index $counter (printf "h%d" $level)) 1)) }}
+      {{- $num := slice }}
+      {{- range $i, $l := (seq 2 6) }}
+        {{- if ge $level $l }}
+          {{- $num = $num | append (index $counter (printf "h%d" $l)) }}
         {{- end }}
-      </nav>
+      {{- end }}
+
+      <li>
+        <a href="{{ $.RelPermalink }}#{{ .id }}" class="toc-item toc-level-{{ sub .level 1 }}">
+          {{ if (or (index .Params "toc-auto-numbering") (index $.Site.Params "toc-auto-numbering")) }}
+          {{- range $num }}{{- if ne . 0 }}{{- . }}.{{- end }}{{- end }}
+          {{ end }} {{ .text }}
+        </a>
+      </li>
     {{- end }}
+  {{- end }}
+  </ul>
+  </nav>
   {{- end }}
 {{- end }}

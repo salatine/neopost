@@ -3,21 +3,21 @@
 {{ $theme := index (where .Site.Data.themes "name" $themeName) 0 }}
 
 :root {
-    --site-bg: url("{{ $theme.site_bg }}");
-    --accent-color: {{ $theme.accent_color }};
-    --select-color: {{ $theme.select_color }};
-    --link-color: {{ $theme.link_color }};
-    --bg-color: {{ $theme.bg_color }};
-    --text-color: {{ $theme.text_color }};
-    --bg-color2: {{ $theme.bg2_color }};
-    --border-color: {{ $theme.border_color }};
-    --special-text-color: {{ $theme.special_text_color }};
-    --post-header-color: {{ $theme.post_header_color }};
-    --post-shadow-color: {{ $theme.post_shadow_color }};
-    --outline-color: {{ $theme.post_outline_color }};
-    --outline-color2: {{ $theme.post_outline_color2 }};
-    --list-style-type: "{{ $theme.list_style.type}}";
-    --list-style-image: url("{{ $theme.list_style.image}}");
+    --site-bg: url("{{ index $theme "site-bg" }}");
+    --accent-color: {{ index $theme "accent-color" }};
+    --select-color: {{ index $theme "select-color" }};
+    --link-color: {{ index $theme "link-color" }};
+    --bg-color: {{ index $theme "bg-color" }};
+    --text-color: {{ index $theme "text-color" }};
+    --bg-color2: {{ index $theme "bg2-color" }};
+    --border-color: {{ index $theme "border-color" }};
+    --special-text-color: {{ index $theme "special-text-color" }};
+    --post-header-color: {{ index $theme "post-header-color" }};
+    --post-shadow-color: {{ index $theme "post-shadow-color" }};
+    --outline-color: {{ index $theme "post-outline-color" }};
+    --outline-color2: {{ index $theme "post-outline-color2" }};
+    --list-style-type: "{{ (index $theme "list-style").type}}";
+    --list-style-image: url("{{ (index $theme "list-style").image }}");
 }
 
 * {
@@ -115,7 +115,7 @@ li.page-item:not(.disabled):not(.active) a:hover{
 }
 
 li {
-    {{ if $theme.list_style.image }}
+    {{ if (index $theme "list-style").image }}
         list-style-image: var(--list-style-image);
     {{ else }}
         list-style-type: var(--list-style-type);
@@ -124,7 +124,7 @@ li {
 
 nav {margin: 1em;}
 
-nav > ul {
+nav.links > ul {
     max-width: 960px;
     margin: auto;
     line-height: 3rem;
@@ -133,13 +133,13 @@ nav > ul {
     justify-content: space-evenly;
 }
 
-nav li {
+nav.links li {
     text-align: center;
     list-style-image: none;
     list-style-type: none;
 }
 
-nav li > a {
+nav.links li > a {
     font-weight: bold;
     background-color: var(--bg-color);
     border: 4px double var(--outline-color);
@@ -147,8 +147,8 @@ nav li > a {
     text-decoration: none;
 }
 
-nav li > a:visited {color: var(--link-color);}
-nav li > a:hover {
+nav.links li > a:visited {color: var(--link-color);}
+nav.links li > a:hover {
     color: var(--accent-color);
     background-color: var(--select-color);
 }
@@ -197,7 +197,7 @@ a:hover {
     width: 300px; 
     aspect-ratio: 1;
     {{ with .Site.GetPage "section" "/sidebar/_index.md" }}
-    {{ if .Params.icon_use_flower_shape }}
+    {{ if index .Params "icon-use-flower-shape" }}
         --g:/37.02% 37.02% radial-gradient(#000 calc(71% - 1px),#0000 71%) no-repeat;
         mask: 90.078% 79.895% var(--g),33.953% 97.355% var(--g),0.004% 49.372% var(--g),35.148% 2.257% var(--g),90.817% 21.121% var(--g),radial-gradient(100% 100%,#000 25.476%,#0000 calc(25.476% + 1px));
     {{ else }}
@@ -369,17 +369,27 @@ header h1 a:hover {
 
 .table-of-contents {
     background-color: var(--bg-color2);
-    padding: 1em;
+    padding: .3em;
     border: 2px solid var(--border-color);
     border-radius: .3em;
     margin-bottom: 1em;
     box-shadow: var(--post-shadow-color) 5px 5px;
 }
 
-.table-of-contents.sidebar {
+.table-of-contents.float {
 }
 
-.table-of-contents.float {
+.table-of-contents nav {
+    margin: 0 .5em;
+}
+
+.table-of-contents nav ul {
+    margin: .5em 1em;
+    padding: 0;
+}
+
+.table-of-contents nav li {
+    margin: .3em 0;
 }
 
 #single-grid {
