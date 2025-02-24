@@ -137,6 +137,7 @@ Start with these basic CSS rules to style the table of contents:
 {{- end }}
 
 {{- /* Render */}}
+{{ $page := . }}
 {{- if (index .Params "table-of-contents") }}
   {{- with $headings }}
     {{- if ge (len .) $minNumHeadings }}
@@ -158,7 +159,10 @@ Start with these basic CSS rules to style the table of contents:
 
       <li>
         <a href="{{ $.RelPermalink }}#{{ .id }}" class="toc-item toc-level-{{ sub .level 1 }}">
-          {{ if (or (index .Params "toc-auto-numbering") (index $.Site.Params "toc-auto-numbering")) }}
+          {{ $isset := (isset $page.Params "toc-auto-numbering") }}
+          {{ $local := (index $page.Params "toc-auto-numbering") }}
+          {{ $global := (index $.Site.Params "toc-auto-numbering") }}
+          {{ if (or (and $isset $local) (and $global (not $isset)) ) }}
           {{- range $num }}{{- if ne . 0 }}{{- . }}.{{- end }}{{- end }}
           {{ end }} {{ .text }}
         </a>
