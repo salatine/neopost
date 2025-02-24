@@ -155,6 +155,16 @@ nav li > a:hover {
 
 nav.languages {
     margin: .3em;
+    text-align: center;
+}
+
+
+nav.languages ul {
+    display: inline-block;
+}
+
+nav.languages ul li {
+    display: inline-block;
 }
 
 a {
