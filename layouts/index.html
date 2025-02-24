@@ -59,7 +59,7 @@
     {{ range $index, $page := (.Paginate $pages (or (index .Site.Params "posts-per-page") 5)).Pages }}
         <article>
             {{- if (index .Params "table-of-contents") }}
-            <button class="dropbox-btn" onclick="toggleDropbox('post-toc-{{ $index }}')" >☰</button>
+            <button id="post-toc-btn-{{ $index }}" class="dropbox-btn" onclick="toggleDropbox('post-toc-{{ $index }}')" >☰</button>
             <div id="post-toc-{{ $index }}" class="dropbox-content table-of-contents float">
                 {{ partial "toc.html" $page }}
             </div>
@@ -104,7 +104,10 @@
     <script>
     window.addEventListener('click', e => {
         let dropboxs = document.getElementsByClassName("dropbox-content");
-        console.log(dropboxs.length);
+        let dropbox_btns = document.getElementsByClassName("dropbox-btn");
+
+        if (dropbox_btns.namedItem(e.target.id) != null) return;
+
         if(dropboxs.namedItem(e.target.id) == null) {
             for (let i = 0; i < dropboxs.length; i++) {
                 dropboxs[i].removeAttribute("visible");
