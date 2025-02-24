@@ -25,6 +25,29 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+@-moz-document url-prefix() {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent-color) #00000000;
+    }
+}
+
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background: #00000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    -webkit-border-radius: .3rem;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+    background: #000;
+}
+
 ::selection {
     background: var(--select-color);
     color: var(--border-color);
@@ -372,11 +395,22 @@ header h1 a:hover {
     padding: .3em;
     border: 2px solid var(--border-color);
     border-radius: .3em;
-    margin-bottom: 1em;
     box-shadow: var(--post-shadow-color) 5px 5px;
 }
 
+.table-of-contents.sidebar {
+    position: sticky;
+    top: 1rem;
+    height: fit-content;
+    width: 10rem;
+    flex-shrink: 0;
+    max-height: calc(100vh - 2rem);
+    overflow-x: auto;
+}
+
 .table-of-contents.float {
+    max-height: 50%;
+    overflow: auto;
 }
 
 .table-of-contents nav {
@@ -392,10 +426,14 @@ header h1 a:hover {
     margin: .3em 0;
 }
 
-#single-grid {
-    display: grid;
-    grid-template-columns: 1fr 9fr;
+#single-post {
+    display: flex;
     gap: 1rem;
+}
+
+#single-post > article {
+    width: 100%;
+    margin-bottom: 0;
 }
 
 /* these are the mobile styles! */
@@ -418,7 +456,7 @@ header h1 a:hover {
         width: fit-content;
         padding: .3em 1em;
     }
-    nav > ul {
+    nav.links > ul {
     /* this stuff makes it wrap around on mobile */
         display: flex;
         flex-wrap: wrap;
