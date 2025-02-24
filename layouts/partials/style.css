@@ -409,6 +409,8 @@ header h1 a:hover {
 }
 
 .table-of-contents.float {
+    width: max-content;
+    max-width: 50vw;
     max-height: 50%;
     overflow: auto;
 }
@@ -434,6 +436,10 @@ header h1 a:hover {
 #single-post > article {
     width: 100%;
     margin-bottom: 0;
+}
+
+#single-post > #post-toc-mobile {
+    display: none;
 }
 
 /* these are the mobile styles! */
@@ -472,6 +478,17 @@ header h1 a:hover {
     }
     #sidebar li {
         margin: .3em 1em;
+    }
+
+    #single-post > .table-of-contents.sidebar {
+        display: none;
+    }
+
+    #single-post > #post-toc-mobile {
+        display: inline;
+        position: sticky;
+        top: 1rem;
+        height: 50vw;
     }
 }
 </style>
