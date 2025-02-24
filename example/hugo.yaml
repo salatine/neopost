@@ -21,4 +21,4 @@ params:
       less: "read less"
 
   posts-per-page: 1 # defaults to 5 if not defined
-  toc-auto-numbering: true
+  toc-auto-numbering: false

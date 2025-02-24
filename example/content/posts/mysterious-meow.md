@@ -7,6 +7,7 @@ ending-images: []
 author: "mochi"
 draft: false
 table-of-contents: true
+toc-auto-numbering: true
 ---
 <!-- introduction -->
 ## meow
