@@ -1,4 +1,15 @@
 {{ define "main" }}
+    {{ if .IsTranslated }}
+    <nav class="languages">
+        <ul>
+        {{ range .Translations }}
+        <li>
+            <a href="{{ .RelPermalink }}">{{ or (.Language.LanguageName) (.Language.Lang) }}</a>
+        </li>
+        {{ end }}
+        </ul>
+    </nav>
+    {{ end }}
     <div id="content">
     <aside id="sidebar">
         <div id="avatar">
