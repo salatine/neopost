@@ -153,6 +153,20 @@ nav li > a:hover {
     background-color: var(--select-color);
 }
 
+nav.languages {
+    margin: .3em;
+    text-align: center;
+}
+
+
+nav.languages ul {
+    display: inline-block;
+}
+
+nav.languages ul li {
+    display: inline-block;
+}
+
 a {
     color: var(--link-color);
     border-radius: .3em;
