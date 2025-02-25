@@ -438,7 +438,7 @@ header h1 a:hover {
     margin-bottom: 0;
 }
 
-#single-post > #post-toc-mobile {
+#single-post > article > #post-toc-mobile {
     display: none;
 }
 
@@ -484,11 +484,8 @@ header h1 a:hover {
         display: none;
     }
 
-    #single-post > #post-toc-mobile {
+    #single-post > article > #post-toc-mobile {
         display: inline;
-        position: sticky;
-        top: 1rem;
-        height: 50vw;
     }
 }
 </style>
