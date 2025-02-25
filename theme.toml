@@ -10,6 +10,6 @@ demosite = "https://neopost.neocities.org"
 tags = ["blog", "personal", "responsive", "light", "dark"]
 
 authors = [
-  { name = "salatine" homepage = "https://github.com/salatine" },
+  { name = "salatine", homepage = "https://github.com/salatine" },
   { name = "cartola", homepage = "https://github.com/Carto1a" }
 ]
