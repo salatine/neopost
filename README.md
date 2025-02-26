@@ -34,10 +34,10 @@ note: images provided in this example site are mostly taken from the [library of
 
 ### posts
 ```
-hugo new content/posts/new_post.md
+hugo new content/posts/new-post.md
 ```
 this is most of your stuff, a post will appear at the main page and each one will have a page for itself. you can also attribute tags to your posts, which then can be filtered to easily find specific posts.
-you can edit it at `content/posts/new_post.md`.
+you can edit it at `content/posts/new-post.md`.
 
 
 ### sidebar
