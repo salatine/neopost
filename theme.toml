@@ -7,7 +7,7 @@ homepage = "https://github.com/salatine/neopost"
 
 demosite = "https://neopost.neocities.org"
 
-tags = ["blog", "personal", "responsive", "light", "dark"]
+tags = ["blog", "personal", "responsive", "light", "dark", "multilingual"]
 
 authors = [
   { name = "salatine", homepage = "https://github.com/salatine" },
