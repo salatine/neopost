@@ -4,8 +4,29 @@ languageCode: 'en-us'
 titleCaseStyle: 'none' # comment this line for forcing capitalized titles on tags
 theme: "neopost"
 
-taxonomies:
-  tag: "tags"
+languages:
+  en:
+    languageCode: en-us
+    contentDir: content/en
+    languageName: english
+    weight: 1
+    params:
+      read-more:
+        length-limit: 120 # if the text exceeds this number of characters, the read more button will appear to expand the text
+        text:
+          more: "read more"
+          less: "read less"
+  jp:
+    languageCode: ja-jp
+    contentDir: content/jp
+    languageName: 日本語
+    weight: 2
+    params:
+      read-more:
+        length-limit: 80 # if the text exceeds this number of characters, the read more button will appear to expand the text
+        text:
+          more: "もっと読む"
+          less: "もっと読む"
 
 permalinks:
   posts: "/posts/:filename/"
@@ -13,12 +34,5 @@ permalinks:
 params:
   theme: "light-blue" # light-blue, dark-blue, light-green, light-yellow, light-pink, light-purple
   favicon: "/favicon.ico"
-
-  read-more:
-    length-limit: 120 # if the text exceeds this number of characters, the read more button will appear to expand the text
-    text:
-      more: "read more"
-      less: "read less"
-
   posts-per-page: 1 # defaults to 5 if not defined
   toc-auto-numbering: false
