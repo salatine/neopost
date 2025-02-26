@@ -1,6 +1,6 @@
 {{ define "main" }}
     {{ if .IsTranslated }}
-    <nav class="languages">
+    <nav class="languages links">
         <ul>
         {{ range .Translations }}
         <li>
@@ -14,7 +14,7 @@
     <aside id="sidebar">
         <div id="avatar">
             {{ with .Site.GetPage "section" "/sidebar/_index.md" }}
-            <img class="flower" src="{{ .Params.icon_path }}">
+            <img class="flower" src="{{ index .Params "icon-path" }}">
             {{ end }}
         </div>
         
@@ -25,13 +25,13 @@
         </div>
         
         <div class="small-box">
-            {{ with .Site.GetPage "section" "/sidebar/basic_info.md" }}
+            {{ with .Site.GetPage "section" "/sidebar/basic-info.md" }}
                 {{ .Content | safeHTML }}
             {{ end }}
             </ul>
         </div>
         
-        <nav>
+        <nav class="links">
             <ul>
             {{ with .Site.GetPage "section" "/sidebar/_index.md" }}
             {{ range .Params.links }}
@@ -43,7 +43,7 @@
     </aside>
     <main>
         <article id="top" class="clearfix">
-            {{ with .Site.GetPage "section" "/welcome_header/_index.md" }}
+            {{ with .Site.GetPage "section" "/welcome-header/_index.md" }}
             <section>
             <div class="img-right">
                 <img src="{{ .Params.image }}">
@@ -65,21 +65,27 @@
             </section>
             {{ end }}
         </article>
-    {{ $limit := .Site.Params.read_more.length_limit }}
+    {{ $limit := index (index .Site.Params "read-more") "length-limit" }}
     {{ $pages := where .Site.RegularPages "Section" "posts" }}
-    {{ range (.Paginate $pages (or .Site.Params.posts_per_page 5)).Pages }}
+    {{ range $index, $page := (.Paginate $pages (or (index .Site.Params "posts-per-page") 5)).Pages }}
         <article>
+            {{- if (index .Params "table-of-contents") }}
+            <button id="post-toc-btn-{{ $index }}" class="dropbox-btn" onclick="toggleDropbox('post-toc-{{ $index }}')" >☰</button>
+            <div id="post-toc-{{ $index }}" class="dropbox-content table-of-contents float">
+                {{ partial "toc.html" $page }}
+            </div>
+            {{ end }}
             <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-            {{ $tags := .Params.tags }}
+            {{ $tags := $page.Params.tags }}
             tags:
             {{ range $index, $tag := .Params.tags }}
             <a href="{{ relLangURL (printf "/tags/%s" $tag) }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
             {{ end }}
             <div class="post-header">
-                @{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
+                @{{ $page.Params.author }} <span class="timestamp">{{ $page.Date.Format "02/01/2006" }}</span>
             </div>
             <p>{{ .Summary }}</p>
-            {{ with .Params.title_images }}
+            {{ with index $page.Params "title-images" }}
             <div class="photosetx2">
                 {{ range first 2 . }}
                 <a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
@@ -88,15 +94,15 @@
             {{ end }}
             <div class="post-content readmore">
                 <!-- subtracting one because of how truncate works -->
-                {{ if gt (sub (len ((.ContentWithoutSummary | safeHTML) | plainify)) 1) $limit }}
+                {{ if gt (sub (len (( $page.ContentWithoutSummary | safeHTML) | plainify)) 1) $limit }}
                 <div id="text-content">{{ ( .ContentWithoutSummary | safeHTML) | truncate $limit }}</div>
-                <div id="full-content" style="display: none;">{{ .ContentWithoutSummary | safeHTML }}</div>
-                <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">{{ .Site.Params.read_more.text.more }}</summary>
+                <div id="full-content" style="display: none;">{{ $page.ContentWithoutSummary | safeHTML }}</div>
+                <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">{{ (index .Site.Params "read-more").text.more }}</summary>
                 {{ else }} 
-                <div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
+                <div id="full-content">{{ $page.ContentWithoutSummary | safeHTML }}</div>
                 {{ end }}
             </div>
-            {{ with .Params.ending_images }}
+            {{ with index $page.Params "ending-images" }}
             <div class="photosetx3">
                 {{ range first 3 . }}
                 <a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
@@ -107,6 +113,19 @@
     {{ end }}
     {{ template "_internal/pagination.html" . }}
     <script>
+    window.addEventListener('click', e => {
+        let dropboxs = document.getElementsByClassName("dropbox-content");
+        let dropbox_btns = document.getElementsByClassName("dropbox-btn");
+
+        if (dropbox_btns.namedItem(e.target.id) != null) return;
+
+        if(dropboxs.namedItem(e.target.id) == null) {
+            for (let i = 0; i < dropboxs.length; i++) {
+                dropboxs[i].removeAttribute("visible");
+            }
+        }
+    }, true)
+
     function toggleReadMore() {
         var fullContent = document.getElementById("full-content");
         var btnText = document.getElementById("read-more-btn");
@@ -115,12 +134,18 @@
         if (fullContent.style.display === "none") {
             textContent.style.display = "none";
             fullContent.style.display = "inline";
-            btnText.innerHTML = {{ .Site.Params.read_more.text.less }};
+            btnText.innerHTML = {{ (index .Site.Params "read-more").text.less }};
         } else {
             textContent.style.display = "inline";
             fullContent.style.display = "none";
-            btnText.innerHTML = {{ .Site.Params.read_more.text.more }};
+            btnText.innerHTML = {{ (index .Site.Params "read-more").text.more }};
         }
+    }
+
+    function toggleDropbox(id) {
+        let dropbox = document.getElementById(id);
+
+        dropbox.toggleAttribute("visible");
     }
     </script>
     </main>

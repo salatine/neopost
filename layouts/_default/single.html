@@ -1,29 +1,63 @@
 {{ define "main" }}
-<article>
-	<h2>{{ .Title }}</h2>
-	{{ $tags := .Params.tags }}
-	tags:
-	{{ range $index, $tag := .Params.tags }}
-	<a href="{{ relLangURL (printf "/tags/%s" $tag) }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
-	{{ end }}
-	<div class="post-header">
-	@{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
-	</div>
-	<p>{{ .Summary }}</p>
-	{{ with .Params.title_images }}
-	<div>
-	{{ range first 2 . }}
-	<a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
-	{{ end }}
-	</div>
-	{{ end }}
-	<div id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
-	{{ with .Params.ending_images }}
-	<div>
-	{{ range first 3 . }}
-	<a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
-	{{ end }}
-	</div>
-	{{ end }}
-</article>
+<div {{ if (index .Params "table-of-contents") }} id="single-post" {{ end }}>
+    {{- if (index .Params "table-of-contents") }}
+    <aside class="table-of-contents sidebar">
+            {{ partial "toc.html" . }}
+    </aside>
+    {{ end }}
+
+    <article>
+        <div id="post-toc-mobile">
+            <button id="post-toc-btn" class="dropbox-btn" onclick="toggleDropbox('post-toc')" >☰</button>
+            <div id="post-toc" class="dropbox-content table-of-contents float">
+                {{ partial "toc.html" . }}
+            </div>
+        </div>
+        <h2>{{ .Title }}</h2>
+        {{ $tags := .Params.tags }}
+        tags:
+        {{ range $index, $tag := .Params.tags }}
+        <a href="{{ relLangURL (printf "/tags/%s" $tag) }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
+        {{ end }}
+        <div class="post-header">
+        @{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
+        </div>
+        <p>{{ .Summary }}</p>
+        {{ with index .Params "title-images" }}
+        <div>
+        {{ range first 2 . }}
+        <a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
+        {{ end }}
+        </div>
+        {{ end }}
+        <div class="auto-numbering" id="full-content">{{ .ContentWithoutSummary | safeHTML }}</div>
+        {{ with index .Params "ending-images" }}
+        <div>
+        {{ range first 3 . }}
+        <a href="{{ . }}" target="_blank"><img style="max-height: 15rem; margin-right: .3rem;" src="{{ . }}"></a>
+        {{ end }}
+        </div>
+        {{ end }}
+    </article>
+    <script>
+    window.addEventListener('click', e => {
+        let dropboxs = document.getElementsByClassName("dropbox-content");
+        let dropbox_btns = document.getElementsByClassName("dropbox-btn");
+
+        if (dropbox_btns.namedItem(e.target.id) != null) return;
+
+        if(dropboxs.namedItem(e.target.id) == null) {
+            for (let i = 0; i < dropboxs.length; i++) {
+                dropboxs[i].removeAttribute("visible");
+            }
+        }
+    }, true)
+
+    function toggleDropbox(id) {
+        let dropbox = document.getElementById(id);
+
+        dropbox.toggleAttribute("visible");
+    }
+    </script>
+</div>
 {{ end }}

@@ -50,10 +50,10 @@ you can edit it at the directory `content/sidebar/`, there are multiple markdown
 
 ### welcome header
 ```
-hugo new --kind welcome_header welcome_header
+hugo new --kind welcome-header welcome-header
 ```
 this is above all the posts in the main page, you can give yourself a better introduction here, and say whatever you want.
-you can edit it at `content/welcome_header/_index.md`.
+you can edit it at `content/welcome-header/_index.md`.
 
 
 ### license

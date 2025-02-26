@@ -2,8 +2,8 @@
 title: "friends!!"
 date: "2025-01-29T21:05:11-03:00"
 tags: ["meow", "rawr",]
-title_images: ["/photo1.png", "/photo2.png",]
-ending_images: ["/photo3.png", "/photo4.png", "/photo5.png",]
+title-images: ["/photo1.png", "/photo2.png",]
+ending-images: ["/photo3.png", "/photo4.png", "/photo5.png",]
 author: "mochi"
 draft: false
 ---

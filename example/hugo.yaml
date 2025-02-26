@@ -11,8 +11,8 @@ languages:
     languageName: english
     weight: 1
     params:
-      read_more:
-        length_limit: 120 # if the text exceeds this number of characters, the read more button will appear to expand the text
+      read-more:
+        length-limit: 120 # if the text exceeds this number of characters, the read more button will appear to expand the text
         text:
           more: "read more"
           less: "read less"
@@ -22,8 +22,8 @@ languages:
     languageName: 日本語
     weight: 2
     params:
-      read_more:
-        length_limit: 80 # if the text exceeds this number of characters, the read more button will appear to expand the text
+      read-more:
+        length-limit: 80 # if the text exceeds this number of characters, the read more button will appear to expand the text
         text:
           more: "もっと読む"
           less: "もっと読む"
@@ -34,4 +34,5 @@ permalinks:
 params:
   theme: "light-blue" # light-blue, dark-blue, light-green, light-yellow, light-pink, light-purple
   favicon: "/favicon.ico"
-  posts_per_page: 1 # defaults to 5 if not defined
+  posts-per-page: 1 # defaults to 5 if not defined
+  toc-auto-numbering: false

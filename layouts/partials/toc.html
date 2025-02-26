@@ -1,0 +1,175 @@
+{{- /* Last modified: 2023-03-27T11:06:45-07:00 */}}
+
+{{- /*
+Copyright 2023 Veriphor LLC
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
+
+https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+*/}}
+
+{{- /*
+Renders a table of contents by parsing rendered content.
+
+In site configuration, set the default start level, end level, and the minimum
+number of headings required to show the table of contents:
+
+    [params.toc]
+    startLevel = 2      # default is 2
+    endLevel = 3        # default is 3
+    minNumHeadings = 2  # default is 2
+
+To display the table of contents on a page:
+
+    +++
+    title = 'Post 1'
+    toc = true
+    +++
+
+To display the table of contents on a page, and override one or more of the
+default settings:
+
+    +++
+    title = 'Post 1'
+    [toc]
+    startLevel = 2      # default is 2
+    endLevel = 3        # default is 3
+    minNumHeadings = 2  # default is 2
+    +++
+
+Change or localize the title with a "toc_title" key in your i18n file(s).
+
+Start with these basic CSS rules to style the table of contents:
+
+    a.toc-item {
+      display: block;
+    }
+    a.toc-level-1 {
+      margin-left: 0em;
+    }
+    a.toc-level-2 {
+      margin-left: 1em;
+    }
+    a.toc-level-3 {
+      margin-left: 2em;
+    }
+    a.toc-level-4 {
+      margin-left: 3em;
+    }
+    a.toc-level-5 {
+      margin-left: 4em;
+    }
+    a.toc-level-6 {
+      margin-left: 5em;
+    }
+
+@context {page} .
+
+@returns {template.HTML}
+
+@example {{ partial "toc-parse-content.html" . }}
+*/}}
+
+{{- /* Initialize. */}}
+{{- $partialName := "toc-parse-content" }}
+
+{{- /* Verify minimum required version. */}}
+{{- $minHugoVersion := "0.111.3" }}
+{{- if lt hugo.Version $minHugoVersion }}
+  {{- errorf "The %q partial requires Hugo v%s or later." $partialName $minHugoVersion }}
+{{- end }}
+
+{{- /* Determine content path for warning and error messages. */}}
+{{- $contentPath := "" }}
+{{- with .File }}
+  {{- $contentPath = .Path }}
+{{- else }}
+  {{- $contentPath = .Path }}
+{{- end }}
+
+{{- /* Get configuration. */}}
+{{- $minNumHeadings := 1 }}
+{{- $startLevel := 2 }}
+{{- $endLevel := or ($.Param "toc.endLevel" | int) 6 }}
+
+{{- /* Get headings. */}}
+{{- $headings := slice }}
+{{- $ids := slice }}
+{{- range findRE `(?is)<h\d.*?</h\d>` .Content }}
+  {{- $level := substr . 2 1 | int }}
+  {{- if and (ge $level $startLevel) (le $level $endLevel) }}
+    {{- $text := replaceRE `(?is)<h\d.*?>(.+?)</h\d>` "$1" . }}
+    {{- $text = trim $text " " | plainify }}
+    {{- $id := "" }}
+    {{- if findRE `\s+id=` . }}
+      {{- $id = replaceRE `(?is).+?\s+id=(?:\x22|\x27)?(.*?)(?:\x22|\x27)?[\s>].+` "$1" . }}
+      {{- $ids = $ids | append $id }}
+      {{- if not $id }}
+        {{- errorf "The %q partial detected that the %q heading has an empty ID attribute. See %s" $partialName $text $contentPath }}
+      {{- end }}
+    {{- else }}
+      {{- errorf "The %q partial detected that the %q heading does not have an ID attribute. See %s" $partialName $text $contentPath }}
+    {{- end }}
+    {{- $headings = $headings | append (dict "id" $id "level" $level "text" $text) }}
+  {{- end }}
+{{- end }}
+
+{{- /* Check for duplicate heading IDs. */}}
+{{- $unique := slice }}
+{{- $duplicates := slice }}
+{{- range $ids }}
+  {{- if in $unique . }}
+    {{- $duplicates = $duplicates | append . }}
+  {{- else }}
+    {{- $unique = $unique | append . }}
+  {{- end }}
+{{- end }}
+{{- with $duplicates }}
+  {{- errorf "The %q partial detected duplicate heading IDs (%s) in %s" $partialName (delimit . ", ") $contentPath }}
+{{- end }}
+
+{{- /* Render */}}
+{{ $page := . }}
+{{- if (index .Params "table-of-contents") }}
+  {{- with $headings }}
+    {{- if ge (len .) $minNumHeadings }}
+  <nav class="toc">
+  <ul>
+    {{- $counter := dict "h2" 0 "h3" 0 "h4" 0 "h5" 0 "h6" 0 }}
+    {{- range . }}
+      {{- $level := .level }}
+      {{- range $i, $l := (seq (add $level 1) 6) }}
+        {{- $counter = merge $counter (dict (printf "h%d" $l) 0) }}
+      {{- end }}
+      {{- $counter = merge $counter (dict (printf "h%d" $level) (add (index $counter (printf "h%d" $level)) 1)) }}
+      {{- $num := slice }}
+      {{- range $i, $l := (seq 2 6) }}
+        {{- if ge $level $l }}
+          {{- $num = $num | append (index $counter (printf "h%d" $l)) }}
+        {{- end }}
+      {{- end }}
+
+      <li>
+        <a href="{{ $.RelPermalink }}#{{ .id }}" class="toc-item toc-level-{{ sub .level 1 }}">
+          {{ $isset := (isset $page.Params "toc-auto-numbering") }}
+          {{ $local := (index $page.Params "toc-auto-numbering") }}
+          {{ $global := (index $.Site.Params "toc-auto-numbering") }}
+          {{ if (or (and $isset $local) (and $global (not $isset)) ) }}
+          {{- range $num }}{{- if ne . 0 }}{{- . }}.{{- end }}{{- end }}
+          {{ end }} {{ .text }}
+        </a>
+      </li>
+    {{- end }}
+  {{- end }}
+  </ul>
+  </nav>
+  {{- end }}
+{{- end }}
