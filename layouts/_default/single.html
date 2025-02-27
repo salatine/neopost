@@ -7,12 +7,14 @@
     {{ end }}
 
     <article>
+        {{- if (index .Params "table-of-contents") }}
         <div id="post-toc-mobile">
             <button id="post-toc-btn" class="dropbox-btn" onclick="toggleDropbox('post-toc')" >☰</button>
             <div id="post-toc" class="dropbox-content table-of-contents float">
                 {{ partial "toc.html" . }}
             </div>
         </div>
+        {{ end }}
         <h2>{{ .Title }}</h2>
         {{ $tags := .Params.tags }}
         tags:
