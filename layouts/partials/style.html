@@ -87,8 +87,8 @@ header > h1 {
     margin: 0 auto;
     font-size: 2em;
 /*uncomment this line if you want the header text to not take up the full length of the div*/
-    /*width: fit-content;*/
-    max-width: 600px;
+    /* width: fit-content; */
+    max-width: 48rem;
     padding: 6px 12px;
     border-radius: 1em;
     border: 4px double var(--outline-color);
@@ -444,12 +444,12 @@ header h1 a:hover {
 
 #single-post {
     display: flex;
+    justify-content: center;
     gap: 1rem;
 }
 
 #single-post > article {
-    width: 100%;
-    margin-bottom: 0;
+    max-width: 48rem
 }
 
 #single-post > article > #post-toc-mobile {
