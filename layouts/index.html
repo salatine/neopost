@@ -68,7 +68,7 @@
     {{ $limit := index (index .Site.Params "read-more") "length-limit" }}
     {{ $pages := where .Site.RegularPages "Section" "posts" }}
     {{ range $index, $page := (.Paginate $pages (or (index .Site.Params "posts-per-page") 5)).Pages }}
-        <article>
+        <article id="post-{{ $index }}">
             {{- if (index .Params "table-of-contents") }}
             <button id="post-toc-btn-{{ $index }}" class="dropbox-btn" onclick="toggleDropbox('post-toc-{{ $index }}')" >☰</button>
             <div id="post-toc-{{ $index }}" class="dropbox-content table-of-contents float">
@@ -95,11 +95,11 @@
             <div class="post-content readmore">
                 <!-- subtracting one because of how truncate works -->
                 {{ if gt (sub (len (( $page.ContentWithoutSummary | safeHTML) | plainify)) 1) $limit }}
-                <div id="text-content">{{ ( .ContentWithoutSummary | safeHTML) | truncate $limit }}</div>
-                <div id="full-content" style="display: none;">{{ $page.ContentWithoutSummary | safeHTML }}</div>
-                <summary id="read-more-btn" onclick="toggleReadMore()" style="display: inline;">{{ (index .Site.Params "read-more").text.more }}</summary>
-                {{ else }} 
-                <div id="full-content">{{ $page.ContentWithoutSummary | safeHTML }}</div>
+                <div class="text-content">{{ ( .ContentWithoutSummary | safeHTML) | truncate $limit }}</div>
+                <div class="full-content" style="display: none;">{{ $page.ContentWithoutSummary | safeHTML }}</div>
+                <summary class="read-more-btn" onclick="toggleReadMore('post-{{ $index }}')" style="display: inline;">{{ (index .Site.Params "read-more").text.more }}</summary>
+                {{ else }}
+                <div class="full-content">{{ $page.ContentWithoutSummary | safeHTML }}</div>
                 {{ end }}
             </div>
             {{ with index $page.Params "ending-images" }}
@@ -126,10 +126,11 @@
         }
     }, true)
 
-    function toggleReadMore() {
-        var fullContent = document.getElementById("full-content");
-        var btnText = document.getElementById("read-more-btn");
-        var textContent = document.getElementById("text-content");
+    function toggleReadMore(id) {
+        var post = document.getElementById(id)
+        var fullContent = post.getElementsByClassName("full-content")[0];
+        var btnText = post.getElementsByClassName("read-more-btn")[0];
+        var textContent = post.getElementsByClassName("text-content")[0];
 
         if (fullContent.style.display === "none") {
             textContent.style.display = "none";
