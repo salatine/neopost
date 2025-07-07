@@ -63,6 +63,22 @@ body {
 
 p {line-height: 1.5em;}
 
+div.tags {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: .5rem 0;
+}
+
+div.tags > p.tags {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+div.tags > a {
+    margin-top: .5rem;
+}
+
 h1 {
     font-size: 1.5em;
     color: var(--post-header-color);
@@ -100,6 +116,18 @@ ul.pagination {
     display: flex;
     justify-content: center;
     padding: 0;
+}
+
+
+ul.tags {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+ul.tags li {
+    display: inline-block;
+    margin: 0;
 }
 
 li.page-item {
@@ -492,7 +520,7 @@ header h1 a:hover {
         flex-wrap: wrap;
         gap: 1em;
     }
-    #sidebar li {
+    #sidebar > .small-box li {
         margin: .3em 1em;
     }
 
