@@ -12,8 +12,10 @@ languages:
     weight: 1
     params:
       sidebar:
-        tags-limit: 1 # limit showcasing only up to this number of tags in bio, defaults to 5
-        more-tags-text: "more tags..." # show a hyperlink with this text if there's more tags than tags-limit
+        tags:
+          enable: true # default = true?
+          limit: 2 # limit showcasing only up to this number of tags in bio, defaults to 5
+          more-text: "more tags..." # show a hyperlink with this text if there's more tags than tags-limit
 
       read-more:
         length-limit: 120 # if the text exceeds this number of characters, the read more button will appear to expand the text
@@ -27,8 +29,10 @@ languages:
     weight: 2
     params:
       sidebar:
-        tags-limit: 1 # limit showcasing only up to this number of tags in bio, defaults to 5
-        more-tags-text: "その他のタグ。。。" # show a hyperlink with this text if there's more tags than tags-limit
+        tags:
+          enable: true # default = true?
+          limit: 2 # limit showcasing only up to this number of tags in bio, defaults to 5
+          more-text: "その他のタグ。。。" # show a hyperlink with this text if there's more tags than tags-limit
 
       read-more:
         length-limit: 80 # if the text exceeds this number of characters, the read more button will appear to expand the text
