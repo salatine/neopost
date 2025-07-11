@@ -20,7 +20,7 @@ params:
     theme: "light-purple"
 ```
 set the desired color by changing the `theme` parameter inside `params`, currently there are `light-blue`, `dark-blue`, `light-green`, `light-yellow`, `light-pink`, `light-purple` as options.
-
+you can also add your own custom themes at `/data/custom_themes.yaml` and add its name in the `theme` parameter. if a name of a theme by neopost is conflicted with a custom theme, the themes by neopost are prioritized. all of this is showcased in the example site!
 
 ## example site
 it's *HIGHLY!* recommended to test the example provided with the theme, just to learn how to mess with it. you can do that by running (considering you already did the installation steps):
