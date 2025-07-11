@@ -32,19 +32,21 @@
         </div>
 
         {{ if .Site.Params.sidebar.tags.enable }}
-        <div class="tags">
-            <p class="tags">Tags</p>
-        </div>
+        <div>
+            <div class="tags">
+                <p class="tags">Tags</p>
+            </div>
 
-        <ul class="tags">
-        {{ $tags_limit := (or (index .Site.Params.sidebar.tags "limit") 5) }}
-        {{ $more_tags_text := (or (index .Site.Params.sidebar.tags "more-text") "more tags...") }}
-        {{ $tags := .Site.Taxonomies.tags | sort }}
-        {{ range $tags | first $tags_limit }}<li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a></li>{{ end }}
-        </ul>
-        {{ if gt (len $tags) $tags_limit }}
-        <div class="tags">
-            <a href="{{ relLangURL (printf "/tags") }}"><b>{{ $more_tags_text }}</b></a>
+            <ul class="tags">
+            {{ $tags_limit := (or (index .Site.Params.sidebar.tags "limit") 5) }}
+            {{ $more_tags_text := (or (index .Site.Params.sidebar.tags "more-text") "more tags...") }}
+            {{ $tags := .Site.Taxonomies.tags | sort }}
+            {{ range $tags | first $tags_limit }}<li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a></li>{{ end }}
+            </ul>
+            {{ if gt (len $tags) $tags_limit }}
+            <div class="tags">
+                <a href="{{ relLangURL (printf "/tags") }}"><b>{{ $more_tags_text }}</b></a>
+            </div>
         </div>
         {{ end }}
         {{ end }}
