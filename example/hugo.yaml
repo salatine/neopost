@@ -44,7 +44,9 @@ permalinks:
   posts: "/posts/:filename/"
 
 params:
-  theme: "light-blue" # light-blue, dark-blue, light-green, light-yellow, light-pink, light-purple
+  # themes made by neopost: light-blue, dark-blue, light-green, light-yellow, light-pink, light-purple
+  # but you can also create your colored theme at "/data/custom_themes.yaml"!
+  theme: "meow"
   favicon: "/favicon.ico"
   posts-per-page: 1 # defaults to 5 if not defined
   toc-auto-numbering: false
