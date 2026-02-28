@@ -11,5 +11,4 @@ tags = ["blog", "personal", "responsive", "light", "dark", "multilingual"]
 
 authors = [
   { name = "salatine", homepage = "https://github.com/salatine" },
-  { name = "cartola", homepage = "https://github.com/Carto1a" }
 ]
