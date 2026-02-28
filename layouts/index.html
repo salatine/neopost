@@ -115,9 +115,16 @@
             <div class="post-content readmore">
                 <!-- subtracting one because of how truncate works -->
                 {{ if gt (sub (len (( $page.ContentWithoutSummary | safeHTML) | plainify)) 1) $limit }}
-                <div class="text-content">{{ ( .ContentWithoutSummary | safeHTML) | truncate $limit }}</div>
-                <div class="full-content" style="display: none;">{{ $page.ContentWithoutSummary | safeHTML }}</div>
-                <summary class="read-more-btn" onclick="toggleReadMore('post-{{ $index }}')" style="display: inline;">{{ (index .Site.Params "read-more").text.more }}</summary>
+                <div class="text-content">
+                {{- $truncated := ((.ContentWithoutSummary | safeHTML) | truncate $limit) -}}
+                {{- $button := printf `<span class="read-more-btn" onclick="toggleReadMore('post-%d')">%s</span>` $index ((index .Site.Params "read-more").text.more) -}}
+                {{- $truncated | replaceRE "</p>$" (printf " %s</p>" $button) | safeHTML -}}
+                </div>
+                <div class="full-content" style="display:none;">
+                {{- $full := ($page.ContentWithoutSummary | safeHTML) -}}
+                {{- $lessBtn := printf `<span class="read-more-btn" onclick="toggleReadMore('post-%d')">%s</span>` $index ((index .Site.Params "read-more").text.less) -}}
+                {{- $full | replaceRE "</p>$" (printf " %s</p>" $lessBtn) | safeHTML -}}
+                </div>
                 {{ else }}
                 <div class="full-content">{{ $page.ContentWithoutSummary | safeHTML }}</div>
                 {{ end }}
