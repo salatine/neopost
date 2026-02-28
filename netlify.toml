@@ -1,2 +1,4 @@
 [build]
    ignore = "/bin/false"
+[build.environment]
+    HUGO_VERSION = "v0.156.0"
