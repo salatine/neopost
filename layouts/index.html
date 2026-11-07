@@ -138,7 +138,7 @@
             {{ end }}
         </article>
     {{ end }}
-    {{ template "_internal/pagination.html" . }}
+    {{ partial "pagination.html" (dict "page" . "format" "terse") }}
     <script>
     window.addEventListener('click', e => {
         let dropboxs = document.getElementsByClassName("dropbox-content");
