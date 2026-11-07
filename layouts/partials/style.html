@@ -120,8 +120,11 @@ header > h1 {
 
 ul.pagination {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     padding: 0;
+    margin: 1em 0;
+    gap: .25em;
 }
 
 
@@ -241,17 +244,17 @@ a:hover {
 }
 
 #sidebar {
+    flex: 1 0 320px;
     background-color: var(--bg-color2);
     color: var(--special-text-color);
     height: fit-content;
-    min-width: 320px;
     margin-top: 1em;
     margin-right: 2em;
     border-radius: .5em;
 }
 
 .small-box {
-    max-width: 240px;
+    max-width: 75%;
     margin: auto;
     border: 2px solid var(--bg-color);
     font-size: 11px;
@@ -260,7 +263,6 @@ a:hover {
 
 #avatar {
     margin: .5em;
-    max-width: 320px;
 }
 
 /*flower shape generated from here: https://css-generators.com/flower-shapes/ */
@@ -526,7 +528,7 @@ header h1 a:hover {
         flex-wrap: wrap;
         flex-direction: row;
     }
-    #bio {width: 50%;}
+    #bio {width: 75%;}
 
     #sidebar ul {
         line-height: 2em;
@@ -553,5 +555,10 @@ pre {
     padding:0.75rem 1rem;
     margin:1.2rem 0;
     overflow-x:auto;
+}
+
+pre code {
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 </style>
