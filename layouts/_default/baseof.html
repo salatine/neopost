@@ -21,9 +21,7 @@
 </head>
 <body>
         <header><h1 id="{{ .Site.Title }}"><a href="{{ absLangURL "/" }}">{{ .Site.Title }}</a></h1></header>
-<main>
     {{ block "main" . }}{{ end }}
     {{ if .Param "nextprev" }}{{ partial "nextprev.html" . }}{{ end }}
-</main>
 </body>
 </html>
