@@ -1,7 +1,7 @@
 <style>
 {{ $themeName := .Site.Params.theme }}
-{{ $theme := index (where .Site.Data.themes "name" $themeName) 0 }}
-{{ $custom_themes := (index .Site.Data "custom_themes") }}
+{{ $theme := index (where hugo.Data.themes "name" $themeName) 0 }}
+{{ $custom_themes := (index hugo.Data "custom_themes") }}
 {{ if $custom_themes }}
     {{ if not $theme }}
         {{ $theme = index (where $custom_themes "name" $themeName) 0 }}
@@ -266,7 +266,7 @@ a:hover {
 
 /*flower shape generated from here: https://css-generators.com/flower-shapes/ */
 .flower {
-    width: 300px; 
+    width: 300px;
     aspect-ratio: 1;
     {{ with .Site.GetPage "section" "/sidebar/_index.md" }}
     {{ if index .Params "icon-use-flower-shape" }}
@@ -517,7 +517,7 @@ header h1 a:hover {
         border-radius: .3em;
     }
     header {min-height: 110px;}
-    header > h1 { 
+    header > h1 {
         width: fit-content;
         padding: .3em 1em;
     }
@@ -528,7 +528,7 @@ header h1 a:hover {
         flex-direction: row;
     }
     #bio {width: 50%;}
-    
+
     #sidebar ul {
         line-height: 2em;
         display: flex;
@@ -553,6 +553,6 @@ pre {
     border-radius:6px;
     padding:0.75rem 1rem;
     margin:1.2rem 0;
-    overflow-x:auto;  
+    overflow-x:auto;
 }
 </style>
