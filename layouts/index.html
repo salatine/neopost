@@ -4,7 +4,7 @@
         <ul>
         {{ range .Translations }}
         <li>
-            <a href="{{ .RelPermalink }}">{{ or (.Language.LanguageName) (.Language.Lang) }}</a>
+            <a href="{{ .RelPermalink }}">{{ or (.Language.Label) (.Language.Lang) }}</a>
         </li>
         {{ end }}
         </ul>
