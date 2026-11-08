@@ -27,19 +27,19 @@ theme = "neopost"
     more = "read more"
     less = "read less"
 
-[languages.jp]
-  locale = "ja-jp"
+[languages.ja]
+  locale = "ja-JP"
   label = "日本語"
   weight = 2
-  [languages.jp.params]
+  [languages.ja.params]
     dateformat = "2006-01-02 15:04:05-0700"
-  [languages.jp.params.sidebar.tags]
+  [languages.ja.params.sidebar.tags]
     enable = true
     limit = 2
     more-text = "その他のタグ。。。"
-  [languages.jp.params.read-more]
+  [languages.ja.params.read-more]
     length-limit = 80
-  [languages.jp.params.read-more.text]
+  [languages.ja.params.read-more.text]
     more = "もっと読む"
     less = "閉じる"
 

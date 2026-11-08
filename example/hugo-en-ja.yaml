@@ -29,8 +29,8 @@ languages:
         text:
           more: "read more"
           less: "read less"
-  jp:
-    locale: ja-jp
+  ja:
+    locale: ja-ja
     label: 日本語
     weight: 2
     params:
