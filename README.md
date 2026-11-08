@@ -22,23 +22,23 @@ hugo serve
 
 ## configuration
 
-`example` folder has both `hugo-en` and `hugo-en-jp` files 
-in both `toml` and `yaml` formats. 
+Your configuration is set in the `hugo.yaml` or `hugo.toml` file.
+
 If you aren't familiar with either formats, prefer the `toml` format.
 
-`hugo-en` is a single-language quickstart, 
-and most likely you'll want to use this one.
-`hugo-en-jp` shows how you can set up a two-language setting.
+`example` folder has:
+- `hugo-en` - single-language configuration file, use this if you are not going to localize your blog
+- `hugo-en-ja` - two-language configuration file, more of an example of how to localize the settings as you see fit.
 
-Choose one and copy it over to the root of your project, 
-and name it as `hugo.toml` OR `hugo.yaml`.
+Choose one of the config files from `themes/neopost/example/` and copy it over to the root of your project as `hugo.toml` or `hugo.yaml`
 
 ### Parameters
 
-The following parameters can be configured under `[params]` (TOML) or `params:` (YAML).
+About theme:
 
 You can also add your own custom themes at `/data/custom_themes.yaml` and add its name in the `theme` parameter. if a name of a theme by neopost is conflicted with a custom theme, the themes by neopost are prioritized. all of this is showcased in the example site!
 
+List of parameters you can set:
 
 | Parameter | Type | Description |
 |---|---|---|
@@ -64,24 +64,6 @@ You can also add your own custom themes at `/data/custom_themes.yaml` and add it
 | `read-more.text.more` | String | Text displayed when the content is collapsed. |
 | `read-more.text.less` | String | Text displayed when the content is expanded. |
 
-## Multilingual Configuration
-
-When using two or more locales, you can set different values for each locale.
-When you don't have it set in locale explicitly, the default params one will be used. 
-example: Date format
-```toml
-[params]
-  # uses this value when locale does not have set explicitly
-  dateformat = '01/02/2006'
-
-[languages.en.params]
-  dateformat = '02/01/2006 15:04:05-0700'
-
-[languages.jp.params]
-  dateformat = '2006-01-02 15:04:05-0700'
-
-```
-
 ## example site
 it's *HIGHLY!* recommended to test the example provided with the theme, just to learn how to mess with it. you can do that by running (considering you already did the installation steps):
 ```bash
@@ -89,9 +71,8 @@ cp -r themes/neopost/example/. .
 hugo serve
 ```
 
-The example will provide an example how to arrange your blog posts in two languages. 
-It's good to have images together with the post that is using it
-and you'll be glad you did it!
+In the example, you can see how to set up your hugo blog in two languages, 
+and also how to arrange the images with the post so you don't need to put them all into the `static` folder.
 
 note: images provided in this example site are mostly taken from the [library of congress](https://www.loc.gov/free-to-use/cats/).
 
