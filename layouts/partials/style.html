@@ -1,7 +1,7 @@
 <style>
 {{ $themeName := .Site.Params.theme }}
-{{ $theme := index (where .Site.Data.themes "name" $themeName) 0 }}
-{{ $custom_themes := (index .Site.Data "custom_themes") }}
+{{ $theme := index (where hugo.Data.themes "name" $themeName) 0 }}
+{{ $custom_themes := (index hugo.Data "custom_themes") }}
 {{ if $custom_themes }}
     {{ if not $theme }}
         {{ $theme = index (where $custom_themes "name" $themeName) 0 }}
@@ -120,8 +120,11 @@ header > h1 {
 
 ul.pagination {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     padding: 0;
+    margin: 1em 0;
+    gap: .25em;
 }
 
 
@@ -152,7 +155,6 @@ li.page-item a{
     border-radius: .3em;
     margin-bottom: 1em;
     box-shadow: var(--post-shadow-color) 5px 5px;
-
     text-decoration: none;
     user-select: none;
 }
@@ -242,17 +244,17 @@ a:hover {
 }
 
 #sidebar {
+    flex: 1 0 320px;
     background-color: var(--bg-color2);
     color: var(--special-text-color);
     height: fit-content;
-    min-width: 320px;
     margin-top: 1em;
     margin-right: 2em;
     border-radius: .5em;
 }
 
 .small-box {
-    max-width: 240px;
+    max-width: 75%;
     margin: auto;
     border: 2px solid var(--bg-color);
     font-size: 11px;
@@ -261,12 +263,11 @@ a:hover {
 
 #avatar {
     margin: .5em;
-    max-width: 320px;
 }
 
 /*flower shape generated from here: https://css-generators.com/flower-shapes/ */
 .flower {
-    width: 300px; 
+    width: 300px;
     aspect-ratio: 1;
     {{ with .Site.GetPage "section" "/sidebar/_index.md" }}
     {{ if index .Params "icon-use-flower-shape" }}
@@ -517,7 +518,7 @@ header h1 a:hover {
         border-radius: .3em;
     }
     header {min-height: 110px;}
-    header > h1 { 
+    header > h1 {
         width: fit-content;
         padding: .3em 1em;
     }
@@ -527,8 +528,8 @@ header h1 a:hover {
         flex-wrap: wrap;
         flex-direction: row;
     }
-    #bio {width: 50%;}
-    
+    #bio {width: 75%;}
+
     #sidebar ul {
         line-height: 2em;
         display: flex;
@@ -553,6 +554,11 @@ pre {
     border-radius:6px;
     padding:0.75rem 1rem;
     margin:1.2rem 0;
-    overflow-x:auto;  
+    overflow-x:auto;
+}
+
+pre code {
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 </style>

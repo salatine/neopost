@@ -1,0 +1,49 @@
+title: "cat blog!!"
+baseURL: "https://neopost.neocities.org"
+locale: "en-us"
+titleCaseStyle: "none"
+theme: "neopost"
+
+params:
+  theme: "light-blue"
+  favicon: "/favicon.ico"
+  # posts-per-page: 1
+  toc-auto-numbering: false
+  dateformat: '01/02/2006 15:04'
+
+languages:
+  en:
+    locale: en-us
+    label: english
+    weight: 1
+    params:
+      dateformat: "02/01/2006 15:04:05-0700"
+      sidebar:
+        tags:
+          enable: true
+          limit: 2
+          more-text: "more tags..."
+
+      read-more:
+        length-limit: 120
+        text:
+          more: "read more"
+          less: "read less"
+  ja:
+    locale: ja-ja
+    label: 日本語
+    weight: 2
+    params:
+      dateformat: "2006/01/02 15:04:05-0700"
+      sidebar:
+        tags:
+          enable: true
+          limit: 2
+          more-text: "その他のタグ。。。"
+
+      read-more:
+        length-limit: 80
+        text:
+          more: "もっと読む"
+          less: "閉じる"
+

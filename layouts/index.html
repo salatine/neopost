@@ -4,7 +4,7 @@
         <ul>
         {{ range .Translations }}
         <li>
-            <a href="{{ .RelPermalink }}">{{ or (.Language.LanguageName) (.Language.Lang) }}</a>
+            <a href="{{ .RelPermalink }}">{{ or (.Language.Label) (.Language.Lang) }}</a>
         </li>
         {{ end }}
         </ul>
@@ -102,15 +102,19 @@
             <a href="{{ relLangURL (printf "/tags/%s" $tag) }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
             {{ end }}
             <div class="post-header">
-                @{{ $page.Params.author }} <span class="timestamp">{{ $page.Date.Format "02/01/2006" }}</span>
+                @{{ $page.Params.author }} <span class="timestamp">{{ $page.Date.Format (default "01/02/2006 15:04" .Site.Params.Dateformat) }}</span>
             </div>
             <p>{{ .Summary }}</p>
             {{ with index $page.Params "title-images" }}
-            <div class="photosetx2">
-                {{ range first 2 . }}
-                <a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
-                {{ end }}
-            </div>
+                <div class="photosetx2">
+                    {{ range first 2 . }}
+                        {{ with $page.Resources.GetMatch . }}
+                            <a href="{{ .RelPermalink }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ .RelPermalink }}" alt="">
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                </div>
             {{ end }}
             <div class="post-content readmore">
                 <!-- subtracting one because of how truncate works -->
@@ -130,15 +134,19 @@
                 {{ end }}
             </div>
             {{ with index $page.Params "ending-images" }}
-            <div class="photosetx3">
-                {{ range first 3 . }}
-                <a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
-                {{ end }}
-            </div>
+                <div class="photosetx3">
+                    {{ range first 3 . }}
+                        {{ with $page.Resources.GetMatch . }}
+                            <a href="{{ .RelPermalink }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ .RelPermalink }}" alt="">
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                </div>
             {{ end }}
         </article>
     {{ end }}
-    {{ template "_internal/pagination.html" . }}
+    {{ partial "pagination.html" (dict "page" . "format" "terse") }}
     <script>
     window.addEventListener('click', e => {
         let dropboxs = document.getElementsByClassName("dropbox-content");

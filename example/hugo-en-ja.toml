@@ -1,0 +1,45 @@
+title = "cat blog!!"
+baseURL = "https://neopost.neocities.org"
+locale = "en-us"
+titleCaseStyle = "none"
+theme = "neopost"
+
+[params]
+  theme = "light-blue"
+  favicon = "/favicon.ico"
+  # posts-per-page = 1
+  toc-auto-numbering = false
+  dateformat = '01/02/2006 15:04'
+
+[languages.en]
+  locale = "en-us"
+  label = "english"
+  weight = 1
+  [languages.en.params]
+    dateformat = "02/01/2006 15:04:05-0700"
+  [languages.en.params.sidebar.tags]
+    enable = true
+    limit = 2
+    more-text = "more tags..."
+  [languages.en.params.read-more]
+    length-limit = 80
+  [languages.en.params.read-more.text]
+    more = "read more"
+    less = "read less"
+
+[languages.ja]
+  locale = "ja-JP"
+  label = "日本語"
+  weight = 2
+  [languages.ja.params]
+    dateformat = "2006-01-02 15:04:05-0700"
+  [languages.ja.params.sidebar.tags]
+    enable = true
+    limit = 2
+    more-text = "その他のタグ。。。"
+  [languages.ja.params.read-more]
+    length-limit = 80
+  [languages.ja.params.read-more.text]
+    more = "もっと読む"
+    less = "閉じる"
+
