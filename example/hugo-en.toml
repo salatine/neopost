@@ -1,0 +1,25 @@
+title = "cat blog!!"
+baseURL = "https://neopost.neocities.org"
+locale = "en-us"
+titleCaseStyle = "none"
+theme = "neopost"
+
+[params]
+  theme = "light-blue"
+  favicon = "/favicon.ico"
+  # posts-per-page = 1
+  toc-auto-numbering = false
+  dateformat = "02/01/2006 15:04:05-0700"
+  
+  [params.sidebar.tags]
+    enable = true
+    limit = 2
+    more-text = "more tags..."
+  
+  [params.read-more]
+    length-limit = 80
+  
+  [params.read-more.text]
+    more = "read more"
+    less = "read less"
+
