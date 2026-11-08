@@ -10,7 +10,7 @@ cd my-site
 git clone "https://github.com/salatine/neopost.git" themes/neopost
 
 # copy over the hugo configuration file
-cp example/hugo-en.toml hugo.toml
+cp themes/neopost/example/hugo-en.toml hugo.toml
 
 # create the post (edit it later yourself ok)
 hugo new content/posts/new-post.md
@@ -41,7 +41,7 @@ You can also add your own custom themes at `/data/custom_themes.yaml` and add it
 
 
 | Parameter | Type | Description |
-|---|---|---|っと読む
+|---|---|---|
 | `theme` | String | Choose: `light-blue`, `dark-blue`, `light-green`, `light-yellow`, `light-pink`, `light-purple` |
 | `favicon` | String | Path to the website's favicon. |
 | `posts-per-page` | Integer | Number of posts displayed per page. Default: 5 |

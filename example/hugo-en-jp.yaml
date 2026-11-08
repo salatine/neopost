@@ -14,7 +14,6 @@ params:
 languages:
   en:
     locale: en-us
-    contentDir: content/en
     label: english
     weight: 1
     params:
@@ -32,7 +31,6 @@ languages:
           less: "read less"
   jp:
     locale: ja-jp
-    contentDir: content/jp
     label: 日本語
     weight: 2
     params:
