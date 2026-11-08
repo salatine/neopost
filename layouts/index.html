@@ -106,11 +106,15 @@
             </div>
             <p>{{ .Summary }}</p>
             {{ with index $page.Params "title-images" }}
-            <div class="photosetx2">
-                {{ range first 2 . }}
-                <a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
-                {{ end }}
-            </div>
+                <div class="photosetx2">
+                    {{ range first 2 . }}
+                        {{ with $page.Resources.GetMatch . }}
+                            <a href="{{ .RelPermalink }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ .RelPermalink }}" alt="">
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                </div>
             {{ end }}
             <div class="post-content readmore">
                 <!-- subtracting one because of how truncate works -->
@@ -130,11 +134,15 @@
                 {{ end }}
             </div>
             {{ with index $page.Params "ending-images" }}
-            <div class="photosetx3">
-                {{ range first 3 . }}
-                <a href="{{ . }}" target="_blank"><img src="{{ . }}"></a>
-                {{ end }}
-            </div>
+                <div class="photosetx3">
+                    {{ range first 3 . }}
+                        {{ with $page.Resources.GetMatch . }}
+                            <a href="{{ .RelPermalink }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ .RelPermalink }}" alt="">
+                            </a>
+                        {{ end }}
+                    {{ end }}
+                </div>
             {{ end }}
         </article>
     {{ end }}
