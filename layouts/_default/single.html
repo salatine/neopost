@@ -22,7 +22,7 @@
         <a href="{{ relLangURL (printf "/tags/%s" $tag) }}">{{ $tag }}</a>{{ if ne $index (sub ($tags | len) 1) }},{{ end }}
         {{ end }}
         <div class="post-header">
-        @{{ .Params.author }} <span class="timestamp">{{ .Date.Format "02/01/2006" }}</span>
+        @{{ .Params.author }} <span class="timestamp">{{ .Date.Format (default "01/02/2006 15:04" .Site.Params.Dateformat) }}</span>
         </div>
         <p>{{ .Summary }}</p>
         {{ with index .Params "title-images" }}
