@@ -78,6 +78,8 @@ note: images provided in this example site are mostly taken from the [library of
 
 ## creating content
 
+For the new posts, sidebar and headers, you can edit the files in the archetypes folder to change the template.
+
 ### posts
 ```
 hugo new content/posts/new-post.md
@@ -101,6 +103,16 @@ hugo new --kind welcome-header welcome-header
 this is above all the posts in the main page, you can give yourself a better introduction here, and say whatever you want.
 you can edit it at `content/welcome-header/_index.md`.
 
+### Publishing to Neocities
+
+1. Generate the webpage by 
+
+```bash
+hugo
+```
+2. Upload the **contents of `public/`** (not the public folder itself) to the root directory of your Neocities website.
+
+There are of course more advanced ways to do it (like when you git push to your repo, then a github action would upload it to neocities. Just search for it!)
 
 ### license
 *neopost* is licensed under the [gpl-3.0 license](https://raw.githubusercontent.com/salatine/neopost/main/LICENSE).
